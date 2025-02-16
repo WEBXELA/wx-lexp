@@ -67,8 +67,8 @@ export default function Contact() {
                   transition={{ delay: 0.3 }}
                   className="flex items-start space-x-4"
                 >
-                  <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center flex-shrink-0">
-                    <Mail className="w-5 h-5 text-blue-600" />
+                  <div className="w-10 h-10 rounded-lg bg-[#977ABF] flex items-center justify-center flex-shrink-0">
+                    <Mail className="w-5 h-5 text-[#4805A6]" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900">Email Us</h3>
@@ -83,8 +83,8 @@ export default function Contact() {
                   transition={{ delay: 0.4 }}
                   className="flex items-start space-x-4"
                 >
-                  <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-5 h-5 text-blue-600" />
+                  <div className="w-10 h-10 rounded-lg bg-[#977ABF] flex items-center justify-center flex-shrink-0">
+                    <Phone className="w-5 h-5 text-[#4805A6]" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900">Call Us</h3>
@@ -99,8 +99,8 @@ export default function Contact() {
                   transition={{ delay: 0.5 }}
                   className="flex items-start space-x-4"
                 >
-                  <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-5 h-5 text-blue-600" />
+                  <div className="w-10 h-10 rounded-lg bg-[#977ABF] flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-5 h-5 text-[#4805A6]" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900">Visit Us</h3>
@@ -115,8 +115,8 @@ export default function Contact() {
                   transition={{ delay: 0.6 }}
                   className="flex items-start space-x-4"
                 >
-                  <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center flex-shrink-0">
-                    <Clock className="w-5 h-5 text-blue-600" />
+                  <div className="w-10 h-10 rounded-lg bg-[#977ABF] flex items-center justify-center flex-shrink-0">
+                    <Clock className="w-5 h-5 text-[#4805A6]" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900">Business Hours</h3>
@@ -144,7 +144,7 @@ export default function Contact() {
                       className="w-10 h-10 rounded-lg bg-gray-50 flex items-center justify-center hover:bg-gray-100 transition-colors"
                       aria-label={social.label}
                     >
-                      <social.icon className="w-5 h-5 text-gray-600" />
+                      <social.icon className="w-5 h-5 text-[#4805A6]" />
                     </motion.a>
                   ))}
                 </div>
@@ -174,7 +174,7 @@ export default function Contact() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                    className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#4805A6] focus:border-transparent transition-colors"
                     placeholder="John Doe"
                   />
                 </div>
@@ -190,7 +190,7 @@ export default function Contact() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                    className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#4805A6] focus:border-transparent transition-colors"
                     placeholder="john@example.com"
                   />
                 </div>
@@ -207,7 +207,7 @@ export default function Contact() {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                  className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#4805A6] focus:border-transparent transition-colors"
                   placeholder="How can we help?"
                 />
               </div>
@@ -223,7 +223,7 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   rows={6}
-                  className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors resize-none"
+                  className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#4805A6] focus:border-transparent transition-colors resize-none"
                   placeholder="Tell us more about your inquiry..."
                 />
               </div>
@@ -232,7 +232,7 @@ export default function Contact() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 type="submit"
-                className="w-full flex items-center justify-center space-x-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-lg hover:shadow-blue-500/20"
+                className="w-full flex items-center justify-center space-x-2 px-6 py-3 bg-[#4805A6] text-white rounded-lg hover:bg-[#5A24A6] transition-colors shadow-lg hover:shadow-blue-500/20"
               >
                 <Send className="w-5 h-5" />
                 <span className="font-medium">Send Message</span>

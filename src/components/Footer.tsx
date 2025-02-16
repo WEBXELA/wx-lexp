@@ -9,13 +9,13 @@ export default function Footer() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0.2 }}
-      className="bg-white border-t border-gray-200"
+      className="bg-[#F2F2F2] border-t border-gray-200"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-3">
-              <Search className="w-8 h-8 text-blue-600" />
+              <Search className="w-8 h-8 text-[#4805A6]" />
               <div>
                 <h3 className="text-xl font-bold text-gray-900">WEBXELA LEADGEN</h3>
                 <p className="text-sm text-gray-500">Professional Lead Generation Tool</p>
