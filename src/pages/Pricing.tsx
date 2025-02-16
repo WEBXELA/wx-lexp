@@ -133,8 +133,8 @@ export default function Pricing() {
                   onClick={() => handlePlanSelection(plan.name)}
                   className={`mt-8 w-full rounded-lg px-4 py-2 text-sm font-semibold ${
                     plan.popular
-                      ? 'bg-blue-600 text-white hover:bg-blue-700'
-                      : 'bg-blue-50 text-blue-700 hover:bg-blue-100'
+                      ? 'bg-[#4805A6] text-white hover:bg-[#5A24A6]'
+                      : 'bg-[#977ABF] text-[#4805A6] hover:bg-[#6A3FA6]'
                   } transition-colors`}
                 >
                   {plan.buttonText}

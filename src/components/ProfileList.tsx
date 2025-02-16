@@ -83,7 +83,7 @@ export default function ProfileList({ profiles, platform }: Props) {
                   </button>
                   <button
                     onClick={() => handleOpenProfile(profile.link)}
-                    className="flex items-center space-x-1 text-blue-600 hover:text-blue-800 px-3 py-1.5 rounded-md hover:bg-blue-50 transition-colors"
+                    className="flex items-center space-x-1 text-[#4805A6] hover:text-[#6A3FA6] px-3 py-1.5 rounded-md hover:bg-[#977ABF] transition-colors"
                   >
                     <ExternalLink className="w-4 h-4" />
                     <span className="text-sm">View on {getPlatformText(platform)}</span>
