@@ -28,12 +28,34 @@ export function useSearchLimit() {
     return true; // Always allow searches
   };
 
+  const checkSubscriptionStatus = async () => {
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        return false;
+      }
+      const { data, error } = await supabase
+        .from('subscriptions')
+        .select('status')
+        .eq('user_id', session.user.id)
+        .single();
+      if (error || !data) {
+        return false;
+      }
+      return data.status === 'active';
+    } catch (err) {
+      console.error('Error checking subscription status:', err);
+      return false;
+    }
+  };
+
   return {
     searchCount: 0,
     isLoading,
     error,
     incrementSearchCount,
     remainingSearches: Infinity,
-    hasSubscription: true
+    hasSubscription: true,
+    checkSubscriptionStatus
   };
 }
