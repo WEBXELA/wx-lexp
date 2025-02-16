@@ -111,6 +111,12 @@ export default function Dashboard() {
   };
 
   const handleExport = async () => {
+    const hasSubscription = await checkSubscriptionStatus();
+    if (!hasSubscription) {
+      setShowUpgradeModal(true);
+      return;
+    }
+
     setIsExporting(true);
     try {
       await exportToExcel(searchResponse?.items || [], filters);
