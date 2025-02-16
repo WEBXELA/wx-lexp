@@ -37,3 +37,27 @@ export function useSearchLimit() {
     hasSubscription: true
   };
 }
+
+export async function checkSubscriptionStatus() {
+  try {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) {
+      throw new Error('Not authenticated');
+    }
+
+    const { data, error } = await supabase
+      .from('subscriptions')
+      .select('status')
+      .eq('user_id', session.user.id)
+      .single();
+
+    if (error) {
+      throw error;
+    }
+
+    return data.status === 'active';
+  } catch (error) {
+    console.error('Error checking subscription status:', error);
+    return false;
+  }
+}

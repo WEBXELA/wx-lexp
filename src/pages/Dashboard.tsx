@@ -25,7 +25,7 @@ import { searchTwitterProfiles } from '../api/searchTwitterProfiles';
 import { exportToExcel } from '../utils/exportToExcel';
 import { SearchFiltersState, Profile, SearchResponse } from '../types';
 import { supabase } from '../lib/supabase';
-import { useSearchLimit } from '../hooks/useSearchLimit';
+import { useSearchLimit, checkSubscriptionStatus } from '../hooks/useSearchLimit';
 
 const platformIcons = {
   linkedin: Linkedin,
