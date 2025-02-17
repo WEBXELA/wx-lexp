@@ -9,15 +9,14 @@ const plans = [
     price: '$0',
     description: 'Perfect for trying out our platform',
     features: [
-      '10 searches per day',
+      '5 profiles per day',
       'Basic profile information',
-      'CSV export',
       'Email support',
     ],
     limitations: [
+      'CSV export',
       'No advanced filters',
       'No bulk exports',
-      'No API access',
       'Limited results per search',
     ],
     buttonText: 'Get Started',
@@ -33,7 +32,6 @@ const plans = [
       'Advanced filters',
       'Bulk exports',
       'Priority support',
-      'API access',
       'Team collaboration',
       'Custom exports',
       'Analytics dashboard',
@@ -133,8 +131,8 @@ export default function Pricing() {
                   onClick={() => handlePlanSelection(plan.name)}
                   className={`mt-8 w-full rounded-lg px-4 py-2 text-sm font-semibold ${
                     plan.popular
-                      ? 'bg-[#4805A6] text-white hover:bg-[#5A24A6]'
-                      : 'bg-[#977ABF] text-[#4805A6] hover:bg-[#6A3FA6]'
+                      ? 'bg-blue-600 text-white hover:bg-blue-700'
+                      : 'bg-blue-50 text-blue-700 hover:bg-blue-100'
                   } transition-colors`}
                 >
                   {plan.buttonText}

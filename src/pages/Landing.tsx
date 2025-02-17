@@ -53,7 +53,7 @@ export default function Landing() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.1 }}
-          className="absolute inset-0 bg-gradient-to-br from-[#977ABF] to-[#F2F2F2]"
+          className="absolute inset-0 bg-gradient-to-br from-blue-100 to-blue-50"
         />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="lg:grid lg:grid-cols-12 lg:gap-8">
@@ -68,7 +68,7 @@ export default function Landing() {
                 className="text-5xl sm:text-6xl xl:text-7xl font-bold text-gray-900 tracking-tight"
               >
                 Transform Your
-                <span className="text-[#4805A6]"> Lead Generation</span>
+                <span className="text-blue-600"> Lead Generation</span>
               </motion.h1>
               <motion.p
                 variants={fadeInUp}
@@ -82,21 +82,21 @@ export default function Landing() {
               >
                 <button
                   onClick={() => navigate('/signup')}
-                  className="inline-flex items-center px-8 py-4 text-lg font-medium rounded-xl shadow-xl text-white bg-[#4805A6] hover:bg-[#5A24A6] transition-all hover:shadow-[#977ABF]/20 transform hover:-translate-y-1"
+                  className="inline-flex items-center px-8 py-4 text-lg font-medium rounded-xl shadow-xl text-white bg-blue-600 hover:bg-blue-700 transition-all hover:shadow-blue-500/20 transform hover:-translate-y-1"
                 >
                   Start Free Trial
                   <ArrowRight className="ml-2 w-6 h-6" />
                 </button>
                 <button
                   onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="inline-flex items-center px-8 py-4 text-lg font-medium rounded-xl text-gray-700 bg-[#977ABF] hover:bg-[#6A3FA6] transition-all shadow-lg transform hover:-translate-y-1"
+                  className="inline-flex items-center px-8 py-4 text-lg font-medium rounded-xl text-gray-700 bg-white hover:bg-gray-50 transition-all shadow-lg transform hover:-translate-y-1"
                 >
                   Learn More
                 </button>
               </motion.div>
               
               {/* Trust Indicators */}
-              <motion.div
+              {/* <motion.div
                 variants={fadeInUp}
                 className="mt-12 grid grid-cols-3 gap-8"
               >
@@ -110,11 +110,11 @@ export default function Landing() {
                     whileHover={{ scale: 1.05 }}
                     className="text-center p-4 bg-white rounded-xl shadow-lg"
                   >
-                    <p className="text-3xl font-bold text-[#4805A6]">{stat.value}</p>
+                    <p className="text-3xl font-bold text-blue-600">{stat.value}</p>
                     <p className="text-sm text-gray-600 mt-1">{stat.label}</p>
                   </motion.div>
                 ))}
-              </motion.div>
+              </motion.div> */}
             </motion.div>
 
             <motion.div
@@ -129,7 +129,7 @@ export default function Landing() {
                   alt="Dashboard Preview"
                   className="w-full rounded-2xl"
                 />
-                <div className="absolute inset-0 bg-gradient-to-tr from-[#4805A6]/20 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 to-transparent"></div>
               </div>
             </motion.div>
           </div>
@@ -195,9 +195,9 @@ export default function Landing() {
                 whileHover={{ y: -10 }}
                 className="relative p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all border border-gray-100 group"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-[#977ABF] to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
                 <div className="relative">
-                  <feature.icon className="h-12 w-12 text-[#4805A6] mb-6" />
+                  <feature.icon className="h-12 w-12 text-blue-600 mb-6" />
                   <h3 className="text-xl font-semibold text-gray-900 mb-4">{feature.title}</h3>
                   <p className="text-gray-600 leading-relaxed">{feature.description}</p>
                 </div>
@@ -251,7 +251,7 @@ export default function Landing() {
                 className="text-center"
               >
                 <div className="relative">
-                  <div className="w-20 h-20 mx-auto bg-[#4805A6] rounded-full flex items-center justify-center mb-6">
+                  <div className="w-20 h-20 mx-auto bg-blue-600 rounded-full flex items-center justify-center mb-6">
                     <step.icon className="w-10 h-10 text-white" />
                   </div>
                   {index < 2 && (
@@ -261,7 +261,7 @@ export default function Landing() {
                         whileInView={{ width: '100%' }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.5, duration: 0.8 }}
-                        className="h-0.5 bg-[#977ABF]"
+                        className="h-0.5 bg-blue-200"
                       />
                     </div>
                   )}
@@ -275,7 +275,7 @@ export default function Landing() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-32 bg-white">
+      {/* <section className="py-32 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -294,7 +294,7 @@ export default function Landing() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
-                name: 'Sarah Johnson',
+                name: 'Sarah sophiason',
                 role: 'Marketing Director',
                 company: 'TechCorp',
                 image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&h=200&q=80',
@@ -345,10 +345,10 @@ export default function Landing() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-[#4805A6] to-[#5A24A6]">
+      <section className="py-20 bg-gradient-to-br from-blue-600 to-blue-700">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -358,7 +358,7 @@ export default function Landing() {
           <h2 className="text-4xl font-bold text-white mb-6">
             Ready to Transform Your Lead Generation?
           </h2>
-          <p className="text-xl text-[#977ABF] mb-10 max-w-2xl mx-auto">
+          <p className="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
             Join thousands of businesses already using our platform to drive growth and success
           </p>
           <motion.div
@@ -368,7 +368,7 @@ export default function Landing() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => navigate('/signup')}
-              className="px-8 py-4 text-lg font-medium rounded-xl bg-white text-[#4805A6] hover:bg-[#F2F2F2] transition-all shadow-lg transform hover:-translate-y-1"
+              className="px-8 py-4 text-lg font-medium rounded-xl bg-white text-blue-600 hover:bg-blue-50 transition-all shadow-lg transform hover:-translate-y-1"
             >
               Start Free Trial
             </motion.button>

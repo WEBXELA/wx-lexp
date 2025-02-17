@@ -24,7 +24,7 @@ export default function SearchFilters({ filters, onFilterChange, onSearch, isLoa
             type="text"
             value={filters.jobTitle}
             onChange={(e) => onFilterChange('jobTitle', e.target.value)}
-            className="w-full px-3 sm:px-4 py-1.5 sm:py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4805A6] focus:border-transparent"
+            className="w-full px-3 sm:px-4 py-1.5 sm:py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             placeholder="e.g. Software Engineer"
           />
         </div>
@@ -35,7 +35,7 @@ export default function SearchFilters({ filters, onFilterChange, onSearch, isLoa
             type="text"
             value={filters.company}
             onChange={(e) => onFilterChange('company', e.target.value)}
-            className="w-full px-3 sm:px-4 py-1.5 sm:py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4805A6] focus:border-transparent"
+            className="w-full px-3 sm:px-4 py-1.5 sm:py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             placeholder="e.g. Google"
           />
         </div>
@@ -46,7 +46,7 @@ export default function SearchFilters({ filters, onFilterChange, onSearch, isLoa
             type="text"
             value={filters.location}
             onChange={(e) => onFilterChange('location', e.target.value)}
-            className="w-full px-3 sm:px-4 py-1.5 sm:py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4805A6] focus:border-transparent"
+            className="w-full px-3 sm:px-4 py-1.5 sm:py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             placeholder="e.g. San Francisco"
           />
         </div>
@@ -57,7 +57,7 @@ export default function SearchFilters({ filters, onFilterChange, onSearch, isLoa
             type="text"
             value={filters.industry}
             onChange={(e) => onFilterChange('industry', e.target.value)}
-            className="w-full px-3 sm:px-4 py-1.5 sm:py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4805A6] focus:border-transparent"
+            className="w-full px-3 sm:px-4 py-1.5 sm:py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             placeholder="e.g. Technology"
           />
         </div>
@@ -67,7 +67,7 @@ export default function SearchFilters({ filters, onFilterChange, onSearch, isLoa
           <select
             value={filters.companySize}
             onChange={(e) => onFilterChange('companySize', e.target.value)}
-            className="w-full px-3 sm:px-4 py-1.5 sm:py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4805A6] focus:border-transparent"
+            className="w-full px-3 sm:px-4 py-1.5 sm:py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           >
             <option value="">Any Size</option>
             <option value="1-10">1-10 employees</option>
@@ -83,7 +83,7 @@ export default function SearchFilters({ filters, onFilterChange, onSearch, isLoa
           <select
             value={filters.experience}
             onChange={(e) => onFilterChange('experience', e.target.value)}
-            className="w-full px-3 sm:px-4 py-1.5 sm:py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4805A6] focus:border-transparent"
+            className="w-full px-3 sm:px-4 py-1.5 sm:py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           >
             <option value="">Any Experience</option>
             <option value="internship">Internship</option>
@@ -100,7 +100,7 @@ export default function SearchFilters({ filters, onFilterChange, onSearch, isLoa
           <select
             value={filters.education}
             onChange={(e) => onFilterChange('education', e.target.value)}
-            className="w-full px-3 sm:px-4 py-1.5 sm:py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4805A6] focus:border-transparent"
+            className="w-full px-3 sm:px-4 py-1.5 sm:py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           >
             <option value="">Any Education</option>
             <option value="high-school">High School</option>
@@ -116,7 +116,7 @@ export default function SearchFilters({ filters, onFilterChange, onSearch, isLoa
             type="text"
             value={filters.skills}
             onChange={(e) => onFilterChange('skills', e.target.value)}
-            className="w-full px-3 sm:px-4 py-1.5 sm:py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4805A6] focus:border-transparent"
+            className="w-full px-3 sm:px-4 py-1.5 sm:py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             placeholder="e.g. Python, React"
           />
         </div>
@@ -127,7 +127,7 @@ export default function SearchFilters({ filters, onFilterChange, onSearch, isLoa
             type="text"
             value={filters.languages}
             onChange={(e) => onFilterChange('languages', e.target.value)}
-            className="w-full px-3 sm:px-4 py-1.5 sm:py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4805A6] focus:border-transparent"
+            className="w-full px-3 sm:px-4 py-1.5 sm:py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             placeholder="e.g. English, Spanish"
           />
         </div>
@@ -137,7 +137,7 @@ export default function SearchFilters({ filters, onFilterChange, onSearch, isLoa
           <select
             value={filters.seniority}
             onChange={(e) => onFilterChange('seniority', e.target.value)}
-            className="w-full px-3 sm:px-4 py-1.5 sm:py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4805A6] focus:border-transparent"
+            className="w-full px-3 sm:px-4 py-1.5 sm:py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           >
             <option value="">Any Level</option>
             <option value="junior">Junior</option>
@@ -157,7 +157,7 @@ export default function SearchFilters({ filters, onFilterChange, onSearch, isLoa
         whileTap={{ scale: 0.98 }}
         onClick={onSearch}
         disabled={isLoading}
-        className="mt-4 sm:mt-6 w-full bg-[#4805A6] text-white py-2 sm:py-3 px-4 sm:px-6 rounded-lg text-sm sm:text-base font-medium flex items-center justify-center space-x-2 hover:bg-[#5A24A6] transition-colors disabled:opacity-50"
+        className="mt-4 sm:mt-6 w-full bg-blue-600 text-white py-2 sm:py-3 px-4 sm:px-6 rounded-lg text-sm sm:text-base font-medium flex items-center justify-center space-x-2 hover:bg-blue-700 transition-colors disabled:opacity-50"
       >
         <Search className="w-4 h-4 sm:w-5 sm:h-5" />
         <span>{isLoading ? 'Searching...' : 'Find Profiles'}</span>

@@ -9,15 +9,15 @@ export default function Footer() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0.2 }}
-      className="bg-[#F2F2F2] border-t border-gray-200"
+      className="bg-white border-t border-gray-200"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-3">
-              <Search className="w-8 h-8 text-[#4805A6]" />
+              <Search className="w-8 h-8 text-blue-600" />
               <div>
-                <h3 className="text-xl font-bold text-gray-900">WEBXELA LEADGEN</h3>
+                <h3 className="text-xl font-bold text-gray-900">LEXP</h3>
                 <p className="text-sm text-gray-500">Professional Lead Generation Tool</p>
               </div>
             </div>
@@ -52,15 +52,15 @@ export default function Footer() {
             <ul className="mt-4 space-y-4">
               <li className="flex items-center space-x-3 text-gray-600">
                 <Mail className="w-5 h-5" />
-                <span>support@webxela.com</span>
+                <span>support@lexp.com</span>
               </li>
               <li className="flex items-center space-x-3 text-gray-600">
                 <Phone className="w-5 h-5" />
-                <span>+1 (555) 123-4567</span>
+                <span>+91 9724823602</span>
               </li>
               <li className="flex items-center space-x-3 text-gray-600">
                 <MapPin className="w-5 h-5" />
-                <span>San Francisco, CA</span>
+                <span>Bengaluru, India</span>
               </li>
             </ul>
           </div>
@@ -68,7 +68,7 @@ export default function Footer() {
         
         <div className="mt-8 pt-8 border-t border-gray-200">
           <p className="text-center text-gray-600">
-            © {new Date().getFullYear()} Webxela LeadGen. All rights reserved.
+            © {new Date().getFullYear()} LEXP. All rights reserved.
           </p>
         </div>
       </div>

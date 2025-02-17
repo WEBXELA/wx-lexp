@@ -67,8 +67,8 @@ export default function Contact() {
                   transition={{ delay: 0.3 }}
                   className="flex items-start space-x-4"
                 >
-                  <div className="w-10 h-10 rounded-lg bg-[#977ABF] flex items-center justify-center flex-shrink-0">
-                    <Mail className="w-5 h-5 text-[#4805A6]" />
+                  <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center flex-shrink-0">
+                    <Mail className="w-5 h-5 text-blue-600" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900">Email Us</h3>
@@ -83,31 +83,31 @@ export default function Contact() {
                   transition={{ delay: 0.4 }}
                   className="flex items-start space-x-4"
                 >
-                  <div className="w-10 h-10 rounded-lg bg-[#977ABF] flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-5 h-5 text-[#4805A6]" />
+                  <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center flex-shrink-0">
+                    <Phone className="w-5 h-5 text-blue-600" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900">Call Us</h3>
-                    <p className="text-gray-600">+1 (555) 123-4567</p>
-                    <p className="text-sm text-gray-500">Mon-Fri 9am-6pm EST</p>
+                    <p className="text-gray-600">+91 9724823602</p>
+                    <p className="text-sm text-gray-500">Mon-Fri 9am-6pm IST</p>
                   </div>
                 </motion.div>
 
-                <motion.div
+                {/* <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.5 }}
                   className="flex items-start space-x-4"
                 >
-                  <div className="w-10 h-10 rounded-lg bg-[#977ABF] flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-5 h-5 text-[#4805A6]" />
+                  <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-5 h-5 text-blue-600" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900">Visit Us</h3>
                     <p className="text-gray-600">123 Innovation Drive</p>
-                    <p className="text-gray-600">San Francisco, CA 94105</p>
+                    <p className="text-gray-600">Bengaluru, India 94105</p>
                   </div>
-                </motion.div>
+                </motion.div> */}
 
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
@@ -115,12 +115,12 @@ export default function Contact() {
                   transition={{ delay: 0.6 }}
                   className="flex items-start space-x-4"
                 >
-                  <div className="w-10 h-10 rounded-lg bg-[#977ABF] flex items-center justify-center flex-shrink-0">
-                    <Clock className="w-5 h-5 text-[#4805A6]" />
+                  <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center flex-shrink-0">
+                    <Clock className="w-5 h-5 text-blue-600" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900">Business Hours</h3>
-                    <p className="text-gray-600">Monday - Friday: 9:00 AM - 6:00 PM</p>
+                    <p className="text-gray-600">Monday - Friday: 9:00 AM - 7:00 PM</p>
                     <p className="text-gray-600">Saturday - Sunday: Closed</p>
                   </div>
                 </motion.div>
@@ -144,7 +144,7 @@ export default function Contact() {
                       className="w-10 h-10 rounded-lg bg-gray-50 flex items-center justify-center hover:bg-gray-100 transition-colors"
                       aria-label={social.label}
                     >
-                      <social.icon className="w-5 h-5 text-[#4805A6]" />
+                      <social.icon className="w-5 h-5 text-gray-600" />
                     </motion.a>
                   ))}
                 </div>
@@ -174,8 +174,8 @@ export default function Contact() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#4805A6] focus:border-transparent transition-colors"
-                    placeholder="John Doe"
+                    className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                    placeholder="Sophia Williams"
                   />
                 </div>
 
@@ -190,8 +190,8 @@ export default function Contact() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#4805A6] focus:border-transparent transition-colors"
-                    placeholder="john@example.com"
+                    className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                    placeholder="sophia@example.com"
                   />
                 </div>
               </div>
@@ -207,7 +207,7 @@ export default function Contact() {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#4805A6] focus:border-transparent transition-colors"
+                  className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
                   placeholder="How can we help?"
                 />
               </div>
@@ -223,7 +223,7 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   rows={6}
-                  className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#4805A6] focus:border-transparent transition-colors resize-none"
+                  className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors resize-none"
                   placeholder="Tell us more about your inquiry..."
                 />
               </div>
@@ -232,7 +232,7 @@ export default function Contact() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 type="submit"
-                className="w-full flex items-center justify-center space-x-2 px-6 py-3 bg-[#4805A6] text-white rounded-lg hover:bg-[#5A24A6] transition-colors shadow-lg hover:shadow-blue-500/20"
+                className="w-full flex items-center justify-center space-x-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-lg hover:shadow-blue-500/20"
               >
                 <Send className="w-5 h-5" />
                 <span className="font-medium">Send Message</span>

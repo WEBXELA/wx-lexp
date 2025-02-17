@@ -111,12 +111,7 @@ export default function Dashboard() {
   };
 
   const handleExport = async () => {
-    setIsExporting(true);
-    try {
-      await exportToExcel(searchResponse?.items || [], filters);
-    } finally {
-      setIsExporting(false);
-    }
+    setShowUpgradeModal(true);
   };
 
   const displayedProfiles = searchResponse?.items?.slice(0, INITIAL_VISIBLE_PROFILES) || [];
@@ -128,8 +123,8 @@ export default function Dashboard() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-4">
-              <Search className="w-8 h-8 text-[#4805A6]" />
-              <h1 className="text-xl font-bold text-gray-900">WEBXELA LEADGEN</h1>
+              <Search className="w-8 h-8 text-blue-600" />
+              <h1 className="text-xl font-bold text-gray-900">LEXP</h1>
             </div>
             <button
               onClick={handleSignOut}
@@ -154,7 +149,7 @@ export default function Dashboard() {
                   onClick={() => handleFilterChange('platform', key)}
                   className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all ${
                     filters.platform === key
-                      ? 'bg-[#4805A6] text-white shadow-lg'
+                      ? 'bg-blue-600 text-white shadow-lg'
                       : 'bg-white text-gray-700 hover:bg-gray-50'
                   }`}
                 >
@@ -175,7 +170,7 @@ export default function Dashboard() {
         {/* Loading State */}
         {isLoading && (
           <div className="flex flex-col items-center justify-center py-12">
-            <div className="w-12 h-12 border-t-2 border-b-2 border-[#4805A6] rounded-full animate-spin mb-4" />
+            <div className="w-12 h-12 border-t-2 border-b-2 border-blue-600 rounded-full animate-spin mb-4" />
             <p className="text-gray-600">Searching for profiles...</p>
           </div>
         )}
@@ -192,7 +187,7 @@ export default function Dashboard() {
                 whileTap={{ scale: 0.98 }}
                 onClick={handleExport}
                 disabled={isExporting}
-                className="flex items-center space-x-2 px-4 sm:px-6 py-2.5 sm:py-3 bg-[#4805A6] text-white text-sm sm:text-base rounded-xl hover:bg-[#5A24A6] transition-all duration-200 shadow-lg hover:shadow-green-500/20 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+                className="flex items-center space-x-2 px-4 sm:px-6 py-2.5 sm:py-3 bg-green-600 text-white text-sm sm:text-base rounded-xl hover:bg-green-700 transition-all duration-200 shadow-lg hover:shadow-green-500/20 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
               >
                 <span>
                   {isExporting ? 'Fetching data...' : 'Export to Excel'}
@@ -212,7 +207,7 @@ export default function Dashboard() {
                   whileHover={{ scale: 1.02, y: -2 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={handleShowMore}
-                  className="flex items-center space-x-2 px-6 py-3 bg-white text-[#4805A6] border border-[#4805A6] rounded-xl hover:bg-[#977ABF] transition-all duration-200 shadow-sm hover:shadow-md font-medium"
+                  className="flex items-center space-x-2 px-6 py-3 bg-white text-blue-600 border border-blue-200 rounded-xl hover:bg-blue-50 transition-all duration-200 shadow-sm hover:shadow-md font-medium"
                 >
                   <ChevronDown className="w-5 h-5" />
                   <span>Show More Profiles</span>
@@ -246,8 +241,8 @@ export default function Dashboard() {
             animate={{ opacity: 1, y: 0 }}
             className="text-center py-12"
           >
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#977ABF] mb-4">
-              <Search className="w-8 h-8 text-[#4805A6]" />
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-100 mb-4">
+              <Search className="w-8 h-8 text-blue-600" />
             </div>
             <h3 className="text-lg font-medium text-gray-900 mb-2">Start your search</h3>
             <p className="text-gray-600 max-w-md mx-auto">
@@ -292,14 +287,14 @@ export default function Dashboard() {
                       Unlock Premium Features
                     </h3>
                     <p className="text-gray-600 max-w-md mx-auto">
-                      Upgrade to our premium plan to access unlimited profiles, advanced filters, and exclusive features.
+                      Upgrade to our premium plan to access unlimited exports, advanced filters, and exclusive features.
                     </p>
                   </div>
 
                   {/* Features Grid */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
                     {[
-                      'Unlimited profile access',
+                      'Unlimited exports',
                       'Advanced search filters',
                       'Bulk export capabilities',
                       'Priority support',
@@ -325,11 +320,8 @@ export default function Dashboard() {
 
                   {/* Pricing */}
                   <div className="text-center mb-8">
-                    <p className="text-sm text-gray-500 mb-2">Starting from</p>
-                    <div className="flex items-center justify-center">
-                      <span className="text-4xl font-bold text-gray-900">$49</span>
-                      <span className="text-gray-500 ml-2">/month</span>
-                    </div>
+                    <p className="text-sm text-gray-500 mb-2">Contact us for pricing</p>
+                    <p className="text-gray-600">Get a customized plan that fits your needs</p>
                   </div>
 
                   {/* CTA Buttons */}
@@ -343,7 +335,7 @@ export default function Dashboard() {
                       }}
                       className="px-8 py-3 rounded-xl text-white font-medium shadow-lg hover:shadow-blue-500/20 transition-all duration-200 gradient-bg"
                     >
-                      Upgrade Now
+                      Contact Sales
                     </motion.button>
                     <motion.button
                       whileHover={{ scale: 1.02, y: -2 }}
