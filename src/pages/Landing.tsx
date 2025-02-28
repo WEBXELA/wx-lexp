@@ -275,7 +275,7 @@ export default function Landing() {
       </section>
 
       {/* Testimonials Section */}
-      {/* <section className="py-32 bg-white">
+      <section className="py-32 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -345,7 +345,7 @@ export default function Landing() {
             ))}
           </div>
         </div>
-      </section> */}
+      </section>
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-br from-blue-600 to-blue-700">
