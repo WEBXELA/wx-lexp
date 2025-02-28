@@ -115,7 +115,7 @@ export default function Dashboard() {
   };
 
   // const displayedProfiles = searchResponse?.items?.slice(0, INITIAL_VISIBLE_PROFILES) || [];
-  const displayedProfiles = searchResponse?.items?.slice(0, 10) || [];
+  const displayedProfiles = searchResponse?.items?.slice(0, 10) || []; // Display 10 profiles initially
   const hasMoreProfiles = searchResponse?.items && searchResponse.items.length > INITIAL_VISIBLE_PROFILES;
 
   return (
