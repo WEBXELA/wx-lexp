@@ -72,9 +72,9 @@ export default function Landing() {
               </motion.h1>
               <motion.p
                 variants={fadeInUp}
-                className="mt-6 text-lg sm:text-xl text-gray-600 leading-relaxed"
+                className="mt-6 text-lg sm:text-lg text-gray-600 leading-relaxed"
               >
-                Revolutionize your business with our AI-powered lead generation platform. Find, connect, and convert high-quality prospects with unprecedented efficiency.
+                Revolutionize your business with our AI-powered lead generation platform that's easy to use, delivers ROI in no time, and transforms customer happiness into your competitive edge. Find, connect, and convert high-quality prospects with unprecedented efficiency.
               </motion.p>
               <motion.div
                 variants={fadeInUp}
@@ -96,7 +96,7 @@ export default function Landing() {
               </motion.div>
               
               {/* Trust Indicators */}
-              {/* <motion.div
+              <motion.div
                 variants={fadeInUp}
                 className="mt-12 grid grid-cols-3 gap-8"
               >
@@ -114,7 +114,7 @@ export default function Landing() {
                     <p className="text-sm text-gray-600 mt-1">{stat.label}</p>
                   </motion.div>
                 ))}
-              </motion.div> */}
+              </motion.div>
             </motion.div>
 
             <motion.div
@@ -275,7 +275,7 @@ export default function Landing() {
       </section>
 
       {/* Testimonials Section */}
-      {/* <section className="py-32 bg-white">
+      <section className="py-32 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -345,7 +345,7 @@ export default function Landing() {
             ))}
           </div>
         </div>
-      </section> */}
+      </section>
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-br from-blue-600 to-blue-700">

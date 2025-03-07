@@ -41,7 +41,7 @@ const platformNames = {
   twitter: 'Twitter',
 };
 
-const INITIAL_VISIBLE_PROFILES = 5;
+const INITIAL_VISIBLE_PROFILES = 10;
 
 export default function Dashboard() {
   const navigate = useNavigate();
