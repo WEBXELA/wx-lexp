@@ -41,7 +41,7 @@ const platformNames = {
   twitter: 'Twitter',
 };
 
-const INITIAL_VISIBLE_PROFILES = 5;
+const INITIAL_VISIBLE_PROFILES = 10;
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -114,8 +114,7 @@ export default function Dashboard() {
     setShowUpgradeModal(true);
   };
 
-  // const displayedProfiles = searchResponse?.items?.slice(0, INITIAL_VISIBLE_PROFILES) || [];
-  const displayedProfiles = searchResponse?.items?.slice(0, 10) || []; // Display 10 profiles initially
+  const displayedProfiles = searchResponse?.items?.slice(0, INITIAL_VISIBLE_PROFILES) || [];
   const hasMoreProfiles = searchResponse?.items && searchResponse.items.length > INITIAL_VISIBLE_PROFILES;
 
   return (
@@ -198,12 +197,6 @@ export default function Dashboard() {
 
             <ProfileList
               profiles={displayedProfiles}
-              // Only show 10 profiles initially
-              // profiles={displayedProfiles.slice(0, 10)} 
-              // profiles={
-              //   displayedProfiles.length > 10 ? displayedProfiles.slice(0, 10) : displayedProfiles
-              // }
-              // profiles={displayedProfiles.slice(0, Math.min(displayedProfiles.length))}
               platform={filters.platform}
             />
 
