@@ -15,14 +15,14 @@ import { supabase } from '../lib/supabase';
 import { useSearchLimit } from '../hooks/useSearchLimit';
 
 const platformIcons = {
-  linkedin: Linkedin,
+  // linkedin: Linkedin,
   // instagram: Instagram,
   // facebook: Facebook,
   // twitter: Twitter,
 };
 
 const platformNames = {
-  linkedin: 'LinkedIn',
+  // linkedin: 'LinkedIn',
   // instagram: 'Instagram',
   // facebook: 'Facebook',
   // twitter: 'Twitter',
