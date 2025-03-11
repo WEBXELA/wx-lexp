@@ -74,7 +74,7 @@ export default function Landing() {
                 variants={fadeInUp}
                 className="mt-6 text-lg sm:text-lg text-gray-600 leading-relaxed"
               >
-                Revolutionize your business with our AI-powered lead generation platform that's easy to use, delivers ROI in no time, and transforms customer happiness into your competitive edge. Find, connect, and convert high-quality prospects with unprecedented efficiency.
+                Revolutionize your business with our AI-powered lead generation platform that's easy to use, delivers ROI in no time, and transforms customer happiness into your competitive edge. <br /> Find, connect, and convert high-quality prospects with unprecedented efficiency.
               </motion.p>
               <motion.div
                 variants={fadeInUp}

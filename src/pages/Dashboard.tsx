@@ -2,20 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { motion, AnimatePresence } from 'framer-motion';
-import {
-  Linkedin,
-  Instagram,
-  Facebook,
-  Twitter,
-  Search,
-  ChevronDown,
-  Lock,
-  LogOut,
-  Menu,
-  Check,
-  X,
-  AlertCircle
-} from 'lucide-react';
+import { Linkedin, Instagram, Facebook, Twitter, Search, ChevronDown, Lock, LogOut, Menu, Check, X, AlertCircle } from 'lucide-react';
 import SearchFilters from '../components/SearchFilters';
 import ProfileList from '../components/ProfileList';
 import { searchProfiles } from '../api/searchProfiles';
@@ -36,9 +23,9 @@ const platformIcons = {
 
 const platformNames = {
   linkedin: 'LinkedIn',
-  instagram: 'Instagram',
-  facebook: 'Facebook',
-  twitter: 'Twitter',
+  // instagram: 'Instagram',
+  // facebook: 'Facebook',
+  // twitter: 'Twitter',
 };
 
 const INITIAL_VISIBLE_PROFILES = 10;
@@ -148,9 +135,7 @@ export default function Dashboard() {
                   key={key}
                   onClick={() => handleFilterChange('platform', key)}
                   className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all ${
-                    filters.platform === key
-                      ? 'bg-blue-600 text-white shadow-lg'
-                      : 'bg-white text-gray-700 hover:bg-gray-50'
+                    filters.platform === key ? 'bg-blue-600 text-white shadow-lg' : 'bg-white text-gray-700 hover:bg-gray-50'
                   }`}
                 >
                   <Icon className="w-4 h-4" />

@@ -30,17 +30,17 @@ export default function Footer() {
             <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider">Quick Links</h3>
             <ul className="mt-4 space-y-4">
               <li>
-                <Link to="/" className="text-base text-gray-600 hover:text-gray-900">
+                <Link to="/" className="text-base text-gray-600 hover:text-blue-600">
                   Home
                 </Link>
               </li>
               <li>
-                <Link to="/pricing" className="text-base text-gray-600 hover:text-gray-900">
+                <Link to="/pricing" className="text-base text-gray-600 hover:text-blue-600">
                   Pricing
                 </Link>
               </li>
               <li>
-                <Link to="/dashboard" className="text-base text-gray-600 hover:text-gray-900">
+                <Link to="/dashboard" className="text-base text-gray-600 hover:text-blue-600">
                   Dashboard
                 </Link>
               </li>
