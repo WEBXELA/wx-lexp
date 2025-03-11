@@ -16,9 +16,9 @@ import { useSearchLimit } from '../hooks/useSearchLimit';
 
 const platformIcons = {
   linkedin: Linkedin,
-  instagram: Instagram,
-  facebook: Facebook,
-  twitter: Twitter,
+  // instagram: Instagram,
+  // facebook: Facebook,
+  // twitter: Twitter,
 };
 
 const platformNames = {
