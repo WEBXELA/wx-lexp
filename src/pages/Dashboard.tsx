@@ -15,20 +15,20 @@ import { supabase } from '../lib/supabase';
 import { useSearchLimit } from '../hooks/useSearchLimit';
 
 const platformIcons = {
-  // linkedin: Linkedin,
-  // instagram: Instagram,
-  // facebook: Facebook,
-  // twitter: Twitter,
+//   linkedin: Linkedin,
+//   instagram: Instagram,
+//   facebook: Facebook,
+//   twitter: Twitter,
 };
 
 const platformNames = {
-  // linkedin: 'LinkedIn',
-  // instagram: 'Instagram',
-  // facebook: 'Facebook',
-  // twitter: 'Twitter',
+//   linkedin: 'LinkedIn',
+//   instagram: 'Instagram',
+//   facebook: 'Facebook',
+//   twitter: 'Twitter',
 };
 
-const INITIAL_VISIBLE_PROFILES = 10;
+const INITIAL_VISIBLE_PROFILES = 5;
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -99,6 +99,13 @@ export default function Dashboard() {
 
   const handleExport = async () => {
     setShowUpgradeModal(true);
+    try {
+      await exportToExcel(searchResponse?.items || []);
+    } catch (error) {
+      console.error('Export failed', error);
+    } finally {
+      setIsExporting(false);
+    }
   };
 
   const displayedProfiles = searchResponse?.items?.slice(0, INITIAL_VISIBLE_PROFILES) || [];
