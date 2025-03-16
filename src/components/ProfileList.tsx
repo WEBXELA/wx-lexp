@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { ExternalLink, MapPin, Building, GraduationCap, Users, ChevronDown, ChevronUp, Lock, Check, X } from 'lucide-react';
+import { Briefcase, Linkedin } from 'lucide-react';
+import { FaLinkedin } from 'react-icons/fa6';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Profile } from '../types';
 import { useNavigate } from 'react-router-dom';
@@ -74,32 +76,40 @@ export default function ProfileList({ profiles, platform }: Props) {
                     <h3 className="text-xl font-semibold text-gray-900">
                       {profile.fullName || profile.title}
                     </h3>
-                    {profile.currentPosition && (
-                      <p className="text-gray-600">{profile.currentPosition}</p>
-                    )}
+                    {/* {profile.currentPosition && (
+                      <p className="text-gray-600 flex"><Briefcase className='w-5 h-5 mr-2' />{profile.currentPosition}</p>
+                    )} */}
                   </div>
-                  <div className="flex items-center space-x-2">
+
+                  <div className="flex flex-col items-end space-y-2">
                     <button
                       onClick={() => toggleProfile(profile.link)}
                       className="text-gray-500 hover:text-gray-700 transition-colors"
                     >
                       {expandedProfile === profile.link ? (
-                        <ChevronUp className="w-5 h-5" />
+                        <ChevronUp className="w-6 h-6" />
                       ) : (
-                        <ChevronDown className="w-5 h-5" />
+                        <ChevronDown className="w-6 h-6" />
                       )}
                     </button>
-                    <button
-                      onClick={() => handleOpenProfile(profile.link)}
-                      className="flex items-center space-x-1 text-blue-600 hover:text-blue-800 px-3 py-1.5 rounded-md hover:bg-blue-50 transition-colors"
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                      <span className="text-sm">View on {getPlatformText(platform)}</span>
-                    </button>
+                    <div className='flex flex-col items-start space-y-2'>
+                      {profile.currentPosition && (
+                        <p className="text-gray-600 flex"><Briefcase className='w-5 h-5 mr-2' />{profile.currentPosition}</p>
+                      )}    
+                      <button
+                        onClick={() => handleOpenProfile(profile.link)}
+                        className="flex items-start space-x-2 text-blue-600 hover:text-blue-800 py-1.5 rounded-md hover:bg-blue-50 transition-colors"
+                      >
+                        {/* <ExternalLink className="w-4 h-4" /> */}
+                        <span className="text-sm"><FaLinkedin className='w-6 h-6'/></span>
+                        <span className='hidden'>{getPlatformText(platform)}</span>
+                        
+                      </button>                  
+                    </div>
                   </div>
                 </div>
                 
-                <div className="mt-4 space-y-2">
+                {/* <div className="mt-4 space-y-2">
                   {profile.company && (
                     <div className="flex items-center space-x-2 text-gray-600">
                       <Building className="w-4 h-4" />
@@ -124,7 +134,7 @@ export default function ProfileList({ profiles, platform }: Props) {
                       <span>{profile.followers.toLocaleString()} followers</span>
                     </div>
                   )}
-                </div>
+                </div> */}
 
                 <AnimatePresence>
                   {expandedProfile === profile.link && (
