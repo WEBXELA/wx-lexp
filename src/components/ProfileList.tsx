@@ -94,7 +94,7 @@ export default function ProfileList({ profiles, platform }: Props) {
                     </button>
                     <div className='flex flex-col items-start space-y-2'>
                       {profile.currentPosition && (
-                        <p className="text-gray-600 flex"><Briefcase className='w-5 h-5 mr-2' />{profile.currentPosition}</p>
+                        <p className="text-gray-600 flex"><Briefcase className='w-5 h-5 mr-2' />{profile.currentPosition || profile.company}</p>
                       )}    
                       <button
                         onClick={() => handleOpenProfile(profile.link)}
