@@ -98,7 +98,7 @@ export default function ProfileList({ profiles, platform }: Props) {
                       )}    
                       <button
                         onClick={() => handleOpenProfile(profile.link)}
-                        className="flex items-start space-x-2 text-blue-600 hover:text-blue-800 py-1.5 rounded-md hover:bg-blue-50 transition-colors"
+                        className="flex items-start space-x-2 text-blue-600 hover:text-blue-600 py-1.5 rounded-md hover:bg-blue-50 transition-colors"
                       >
                         {/* <ExternalLink className="w-4 h-4" /> */}
                         <span className="text-sm"><FaLinkedin className='w-6 h-6'/></span>

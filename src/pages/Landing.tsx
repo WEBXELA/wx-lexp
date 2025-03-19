@@ -1,22 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, useAnimation } from 'framer-motion';
-import {
-  Search,
-  Shield,
-  Zap,
-  Globe,
-  Users,
-  BarChart3,
-  ArrowRight,
-  CheckCircle,
-  Target,
-  Rocket,
-  Award,
-  MessageSquare,
-  Star,
-  TrendingUp
-} from 'lucide-react';
+import { Search, Shield, Zap, Globe, Users, BarChart3, ArrowRight, CheckCircle, Target, Rocket, Award, MessageSquare, Star, TrendingUp } from 'lucide-react';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -321,9 +306,11 @@ export default function Landing() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2 }}
-                className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all"
+                whileHover={{ y: -20 }}
+                className="relative bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all border border-gray-100 group" 
               >
-                <div className="flex items-center mb-6">
+                <div className='absolute inset-0 bg-gradient-to-br from-blue-50 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity'/>
+                <div className="relative flex items-center mb-6">
                   <img
                     src={testimonial.image}
                     alt={testimonial.name}
