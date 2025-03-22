@@ -2,9 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { motion, AnimatePresence } from 'framer-motion';
-<<<<<<< Updated upstream
-import { Linkedin, Instagram, Facebook, Twitter, Search, ChevronDown, Lock, LogOut, Menu, Check, X, AlertCircle } from 'lucide-react';
-=======
 import {
   Linkedin,
   Instagram,
@@ -20,7 +17,6 @@ import {
   AlertCircle,
   Clock
 } from 'lucide-react';
->>>>>>> Stashed changes
 import SearchFilters from '../components/SearchFilters';
 import ProfileList from '../components/ProfileList';
 import { searchProfiles } from '../api/searchProfiles';
@@ -33,19 +29,6 @@ import { supabase } from '../lib/supabase';
 import { useSearchLimit } from '../hooks/useSearchLimit';
 
 const platformIcons = {
-<<<<<<< Updated upstream
-//   linkedin: Linkedin,
-//   instagram: Instagram,
-//   facebook: Facebook,
-//   twitter: Twitter,
-};
-
-const platformNames = {
-//   linkedin: 'LinkedIn',
-//   instagram: 'Instagram',
-//   facebook: 'Facebook',
-//   twitter: 'Twitter',
-=======
   // linkedin: Linkedin,
   // instagram: Instagram,
   // facebook: Facebook,
@@ -57,7 +40,6 @@ const platformNames = {
   // instagram: 'Instagram',
   // facebook: 'Facebook',
   // twitter: 'Twitter',
->>>>>>> Stashed changes
 };
 
 const INITIAL_VISIBLE_PROFILES = 5;
@@ -153,13 +135,6 @@ export default function Dashboard() {
 
   const handleExport = async () => {
     setShowUpgradeModal(true);
-    try {
-      await exportToExcel(searchResponse?.items || []);
-    } catch (error) {
-      console.error('Export failed', error);
-    } finally {
-      setIsExporting(false);
-    }
   };
 
   const displayedProfiles = searchResponse?.items?.slice(0, INITIAL_VISIBLE_PROFILES) || [];
@@ -211,7 +186,9 @@ export default function Dashboard() {
                   key={key}
                   onClick={() => handleFilterChange('platform', key)}
                   className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all ${
-                    filters.platform === key ? 'bg-blue-600 text-white shadow-lg' : 'bg-white text-gray-700 hover:bg-gray-50'
+                    filters.platform === key
+                      ? 'bg-blue-600 text-white shadow-lg'
+                      : 'bg-white text-gray-700 hover:bg-gray-50'
                   }`}
                 >
                   <Icon className="w-4 h-4" />
