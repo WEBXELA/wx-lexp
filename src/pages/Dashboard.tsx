@@ -2,7 +2,25 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { motion, AnimatePresence } from 'framer-motion';
+<<<<<<< Updated upstream
 import { Linkedin, Instagram, Facebook, Twitter, Search, ChevronDown, Lock, LogOut, Menu, Check, X, AlertCircle } from 'lucide-react';
+=======
+import {
+  Linkedin,
+  Instagram,
+  Facebook,
+  Twitter,
+  Search,
+  ChevronDown,
+  Lock,
+  LogOut,
+  Menu,
+  Check,
+  X,
+  AlertCircle,
+  Clock
+} from 'lucide-react';
+>>>>>>> Stashed changes
 import SearchFilters from '../components/SearchFilters';
 import ProfileList from '../components/ProfileList';
 import { searchProfiles } from '../api/searchProfiles';
@@ -15,6 +33,7 @@ import { supabase } from '../lib/supabase';
 import { useSearchLimit } from '../hooks/useSearchLimit';
 
 const platformIcons = {
+<<<<<<< Updated upstream
 //   linkedin: Linkedin,
 //   instagram: Instagram,
 //   facebook: Facebook,
@@ -26,6 +45,19 @@ const platformNames = {
 //   instagram: 'Instagram',
 //   facebook: 'Facebook',
 //   twitter: 'Twitter',
+=======
+  // linkedin: Linkedin,
+  // instagram: Instagram,
+  // facebook: Facebook,
+  // twitter: Twitter,
+};
+
+const platformNames = {
+  // linkedin: 'LinkedIn',
+  // instagram: 'Instagram',
+  // facebook: 'Facebook',
+  // twitter: 'Twitter',
+>>>>>>> Stashed changes
 };
 
 const INITIAL_VISIBLE_PROFILES = 5;
@@ -34,7 +66,14 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const [isExporting, setIsExporting] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { incrementSearchCount } = useSearchLimit();
+  const { 
+    remainingSearches, 
+    incrementSearchCount, 
+    hasSubscription,
+    lastReset,
+    timeUntilReset,
+    isLoading: isLoadingLimits 
+  } = useSearchLimit();
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
   const [filters, setFilters] = useState<SearchFiltersState>({
@@ -86,8 +125,23 @@ export default function Dashboard() {
       alert('Please enter at least one search criteria (Job Title, Company, or Skills)');
       return;
     }
+
+    if (remainingSearches === 0 && !hasSubscription) {
+      const message = timeUntilReset
+        ? `Your search limit has been reached. You can search again in ${timeUntilReset}.`
+        : 'Your search limit has been reached. You can search again after 24 hours.';
+        
+      setShowUpgradeModal(true);
+      alert(message + '\nFor unlimited searches, upgrade to our membership.');
+      return;
+    }
     
-    await incrementSearchCount();
+    const canSearch = await incrementSearchCount();
+    if (!canSearch) {
+      setShowUpgradeModal(true);
+      return;
+    }
+
     setFilters(prev => ({ ...prev, page: 1 }));
     setHasSearched(true);
     refetch();
@@ -133,7 +187,22 @@ export default function Dashboard() {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-8">
         <div className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Find Profiles</h2>
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-2xl font-bold text-gray-900">Find Profiles</h2>
+            {!hasSubscription && (
+              <div className="flex items-center space-x-2 text-sm">
+                <Clock className="w-4 h-4 text-gray-500" />
+                <span className="text-gray-600">
+                  {remainingSearches} of 10 searches remaining
+                  {timeUntilReset && remainingSearches === 0 && (
+                    <span className="text-gray-400">
+                      {' '}(Resets in {timeUntilReset})
+                    </span>
+                  )}
+                </span>
+              </div>
+            )}
+          </div>
           <div className="flex flex-wrap gap-4 mb-6">
             {Object.entries(platformNames).map(([key, name]) => {
               const Icon = platformIcons[key as keyof typeof platformIcons];
