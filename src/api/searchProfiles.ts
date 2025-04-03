@@ -82,7 +82,7 @@ export async function searchProfiles(filters: SearchFiltersState): Promise<Searc
         currentPosition: position,
         company,
         education: item.pagemap?.education || [], // Extract education details if available
-        location: item.pagemap?.metatags?.[0]?.['og:locale'] || 'Unknown Location', // Extract location if available
+        location: item.pagemap?.metatags?.[0]?.['locale'] || 'Unknown Location', // Extract location if available
         followers: 0,
         connectionDegree: '',
         about: item.pagemap?.metatags?.[0]?.['og:description'] || 'No description available',

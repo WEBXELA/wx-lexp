@@ -134,6 +134,7 @@ export default function Landing() {
             <GradientText
               colors={['#2563EB', '#07C8F9', '#12A2F4', '#2563EB']}
               animationSpeed={8}
+              showBorder={false}
             >
               <h2 className="text-4xl font-bold mb-2">
                 Powerful Features for Modern Lead Generation
