@@ -8,7 +8,7 @@ interface GradientTextProps {
   showBorder?: boolean;
 }
 
-const defaultColors = ['#ED184F', '#4079ff', '#ED184F', '#ED184F'];
+const defaultColors = ['#2563EB', '#4079ff', '#ED184F', '#2563EB'];
 
 const GradientText: React.FC<GradientTextProps> = ({
   children,

@@ -128,7 +128,7 @@ export default function Contact() {
 
               <div className="mt-8 pt-8 border-t border-gray-200">
                 <h3 className="font-semibold text-gray-900 mb-4">Connect With Us</h3>
-                <div className="flex space-x-4">
+                <div className="flex space-x-4 ">
                   {[
                     { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
                     { icon: Twitter, href: 'https://twitter.com', label: 'Twitter' },
@@ -144,7 +144,7 @@ export default function Contact() {
                       className="w-10 h-10 rounded-lg bg-gray-50 flex items-center justify-center hover:bg-gray-100 transition-colors"
                       aria-label={social.label}
                     >
-                      <social.icon className="w-5 h-5 text-gray-600" />
+                      <social.icon className="w-5 h-5 text-gray-600 hover:text-blue-600" />
                     </motion.a>
                   ))}
                 </div>

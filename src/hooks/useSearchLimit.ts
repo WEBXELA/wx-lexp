@@ -13,7 +13,7 @@ export function useSearchLimit() {
   const [searchCount, setSearchCount] = useState(0);
   const [lastSearch, setLastSearch] = useState<string | null>(null);
   const [lastReset, setLastReset] = useState<string | null>(null);
-  const [hasSubscription, setHasSubscription] = useState(false);
+  const [hasSubscription, setHasSubscription] = useState(true);
 
   useEffect(() => {
     checkLimits();
@@ -38,13 +38,30 @@ export function useSearchLimit() {
       }
 
       if (limits) {
-        setSearchCount(limits.search_count);
-        setLastReset(limits.last_reset);
-        setLastSearch(limits.last_search);
+        const lastSearchDate = new Date(limits.last_search);
+        const resetTime = new Date(lastSearchDate.getTime() + 24 * 60 * 60 * 1000);
+        const now = new Date();
+
+        if (now >= resetTime) {
+          // Reset search count if 24 hours have passed
+          const { error: resetError } = await supabase
+            .from('search_limits')
+            .update({ search_count: 0, last_reset: now.toISOString() })
+            .eq('id', session.session.user.id);
+
+          if (resetError) throw resetError;
+
+          setSearchCount(0);
+          setLastReset(now.toISOString());
+        } else {
+          setSearchCount(limits.search_count);
+          setLastReset(limits.last_reset);
+          setLastSearch(limits.last_search);
+        }
       }
 
       // TODO: Check subscription status
-      setHasSubscription(false);
+      setHasSubscription(true);
 
     } catch (err) {
       console.error('Error checking limits:', err);

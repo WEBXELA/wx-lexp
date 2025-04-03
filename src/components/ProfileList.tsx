@@ -63,7 +63,7 @@ export default function ProfileList({ profiles, platform }: Props) {
             className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
           >
             <div className="flex items-start space-x-4">
-              {shouldShowImage(platform) && profile.profileImageUrl && (
+              {shouldShowImage(platform) && (
                 <img 
                   src={profile.profileImageUrl} 
                   alt={profile.fullName}
@@ -82,9 +82,7 @@ export default function ProfileList({ profiles, platform }: Props) {
                     )}
 
                     {profile.company && (
-                      // <div className="flex items-center space-x-2 text-gray-600">
                         <p className='text-gray-600'>{profile.company}</p>
-                      // </div>
                     )}
                   </div>
 
@@ -158,12 +156,11 @@ export default function ProfileList({ profiles, platform }: Props) {
                         <div className="mb-4 space-y-1">
                           <h4 className="text-base font-semibold text-gray-700">About: <span className='font-medium text-sm'>{profile.about}</span></h4>
                           <h4 className='text-base font-semibold text-gray-700'>Location: <span className='font-medium text-sm'>{profile.location}</span></h4>
-                          <h4 className='text-base font-semibold text-gray-700'>Experience: <span className='font-medium text-sm'>{profile.currentPosition} - {profile.company}</span></h4>
+                          <h4 className='text-base font-semibold text-gray-700'>Experience: <span className='font-medium text-sm'>{profile.currentPosition} {profile.company}</span></h4>
                           <h4 className='text-base font-semibold text-gray-700'>Education: <span className='font-medium text-sm'>{profile.education}</span></h4>
-                          <h4 className='text-base font-semibold text-gray-700'>Certification: <span className='font-medium text-sm'>{profile.connectionDegree}</span></h4>
-                          <h4 className='text-base font-semibold text-gray-700'>Skills: <span className='font-medium text-sm'>{profile.location}</span></h4>
-                          <h4 className='text-base font-semibold text-gray-700'>Phone Number: <span className='font-medium text-sm'>{profile.followers}</span></h4>
-                          {/* <p className="text-gray-600">{profile.about}</p> */}
+                          <h4 className='text-base font-semibold text-gray-700'>Certification: <span className='font-medium text-sm'>{profile.certification.join(', ')}</span></h4>
+                          <h4 className='text-base font-semibold text-gray-700'>Skills: <span className='font-medium text-sm'>{profile.skills.join(', ')}</span></h4>
+                          <h4 className='text-base font-semibold text-gray-700'>Phone Number: <span className='font-medium text-sm'>{profile.phoneNumber}</span></h4>
                         </div>
                       )}
 
