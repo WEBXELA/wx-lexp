@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, useAnimation } from 'framer-motion';
-import { Search, Shield, Zap, Globe, Users, BarChart3, ArrowRight, CheckCircle, Target, Rocket, Award, MessageSquare, Star, TrendingUp } from 'lucide-react';
+import { Search, Shield, Bot, Zap, Globe, Users, BarChart3, ArrowRight, CheckCircle, Target, Rocket, Award, MessageSquare, Star, TrendingUp, ArrowRightIcon, ChevronsRightIcon } from 'lucide-react';
 import GradientText from '../components/GradientText';
+import CountUp from '../components/Countup';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -132,7 +133,7 @@ export default function Landing() {
             className="text-center max-w-3xl mx-auto"
           >
             <GradientText
-              colors={['#2563EB', '#07C8F9', '#12A2F4', '#2563EB']}
+              colors={['#2563EB', "#4079ff", '#ED184F', "#4079ff", '#ED184F', '#2563EB']}
               animationSpeed={8}
               showBorder={false}
             >
@@ -149,7 +150,7 @@ export default function Landing() {
           <div className="mt-20 grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3">
             {[
               {
-                icon: Shield,
+                icon: Bot,
                 title: 'Advanced AI Search',
                 description: 'Leverage cutting-edge AI algorithms to find the most relevant leads based on your specific criteria.',
               },
@@ -209,9 +210,16 @@ export default function Landing() {
             viewport={{ once: true }}
             className="text-center max-w-3xl mx-auto mb-20"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              How It Works
-            </h2>
+            <GradientText
+              colors={['#2563EB', "#4079ff", '#ED184F', "#4079ff", '#ED184F', '#2563EB']}
+              animationSpeed={8}
+              showBorder={false}
+            >
+              <h2 className="text-4xl font-bold mb-4">
+                How It Works
+              </h2>
+            </GradientText>
+            
             <p className="text-xl text-gray-600">
               Get started in minutes with our simple three-step process
             </p>
@@ -245,17 +253,19 @@ export default function Landing() {
               >
                 <div className="relative">
                   <div className="w-20 h-20 mx-auto bg-blue-600 rounded-full flex items-center justify-center mb-6">
-                    <step.icon className="w-10 h-10 text-white" />
+                    <step.icon className="w-10 h-10 text-white " />
                   </div>
                   {index < 2 && (
-                    <div className="hidden md:block absolute top-10 left-full w-full transform -translate-x-1/2">
+                    <div className="hidden md:block absolute top-10 left-96 w-4/5 transform -translate-x-1/2 -translate-y-1/2">
                       <motion.div
                         initial={{ width: 0 }}
                         whileInView={{ width: '100%' }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.5, duration: 0.8 }}
-                        className="h-0.5 bg-blue-200"
-                      />
+                        className="h-1 bg-blue-200"
+                      >
+                        <ChevronsRightIcon className="w-8 h-8 text-blue-300 absolute -top-3.5 left-72 transform " />
+                      </motion.div>
                     </div>
                   )}
                 </div>
@@ -276,9 +286,16 @@ export default function Landing() {
             viewport={{ once: true }}
             className="text-center max-w-3xl mx-auto mb-20"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              What Our Clients Say
-            </h2>
+            <GradientText
+              colors={['#2563EB', "#4079ff", '#ED184F', "#4079ff", '#ED184F', '#2563EB']}
+              animationSpeed={8}
+              showBorder={false}
+            >
+              <h2 className="text-4xl font-bold mb-4">
+                What Our Clients Say
+              </h2>
+            </GradientText>
+            
             <p className="text-xl text-gray-600">
               Join thousands of satisfied customers who have transformed their lead generation process
             </p>

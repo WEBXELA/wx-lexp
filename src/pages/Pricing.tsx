@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Check, X } from 'lucide-react';
+import GradientText from '../components/GradientText';
 
 const plans = [
   {
@@ -78,9 +79,16 @@ export default function Pricing() {
       <div className="bg-white">
         <div className="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">
-              Simple, transparent pricing
-            </h1>
+            <GradientText
+              colors={['#2563EB', "#4079ff", '#ED184F', "#4079ff", '#2563EB']}
+              animationSpeed={8}
+              showBorder={false}
+            >
+              <h1 className="text-4xl font-extrabold mb-1 sm:text-5xl sm:tracking-tight lg:text-6xl">
+                Simple, transparent pricing
+              </h1>
+            </GradientText>
+            
             <p className="mt-4 text-xl text-gray-500">
               Choose the perfect plan for your lead generation needs
             </p>

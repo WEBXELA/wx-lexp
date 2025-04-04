@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Search, Users, MessageSquare } from 'lucide-react';
 import { motion } from 'framer-motion';
+import GradientText from './GradientText';
 
 export default function Navbar() {
   const location = useLocation();
@@ -20,8 +21,8 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16 sm:h-20">
           <Link to="/" className="flex items-center space-x-3">
             <Search className="w-8 h-8 sm:w-10 sm:h-10 text-blue-600" />
-            <div>
-              <h1 className="text-xl sm:text-2xl font-bold text-gray-900">
+            <div className='flex flex-col'>
+              <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-500 to-red-800 bg-clip-text text-transparent">
                 LEXP
               </h1>
               <p className="text-xs sm:text-sm text-gray-500">

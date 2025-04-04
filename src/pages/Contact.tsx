@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Send, Linkedin, Twitter, Globe, Clock } from 'lucide-react';
+import GradientText from '../components/GradientText';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -37,7 +38,15 @@ export default function Contact() {
             animate={{ opacity: 1, y: 0 }}
             className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4"
           >
-            Let's Connect
+            <GradientText
+              colors={['#2563EB', "#4079ff", '#ED184F', "#4079ff", '#2563EB']}
+              animationSpeed={8}
+              showBorder={false}
+            >
+              <h1 className="text-4xl font-extrabold sm:text-5xl sm:tracking-tight lg:text-6xl">
+                Let's Connect
+              </h1>
+            </GradientText>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
