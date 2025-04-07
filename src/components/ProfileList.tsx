@@ -252,7 +252,7 @@ export default function ProfileList({ profiles, platform }: Props) {
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.1 }}
-                      className="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-50 transition-colors"
+                      className="flex items-center space-x-3 p-3 rounded-lg hover:bg-purple-50 transition-colors"
                     >
                       <div className="w-6 h-6 rounded-full gradient-bg flex items-center justify-center flex-shrink-0">
                         <Check className="w-4 h-4 text-white" />

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion, useAnimation } from 'framer-motion';
 import { Search, Shield, Bot, Zap, Globe, Users, BarChart3, ArrowRight, CheckCircle, Target, Rocket, Award, MessageSquare, Star, TrendingUp, ArrowRightIcon, ChevronsRightIcon } from 'lucide-react';
 import GradientText from '../components/GradientText';
-import CountUp from '../components/Countup';
+// import CountUp from '../components/Countup';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -34,13 +34,13 @@ export default function Landing() {
   }, [controls]);
 
   return (
-    <div className="bg-gradient-to-b from-gray-50 to-white">
+    <div className="bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-20 pb-32">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.1 }}
-          className="absolute inset-0 bg-gradient-to-br from-blue-100 to-blue-50"
+          className="absolute inset-0 bg-gradient-to-br from-purple-100 to-purple-50 dark:from-gray-900 dark:to-gray-800"
         />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="lg:grid lg:grid-cols-12 lg:gap-8">
@@ -52,14 +52,14 @@ export default function Landing() {
             >
               <motion.h1
                 variants={fadeInUp}
-                className="text-5xl sm:text-6xl xl:text-7xl font-bold text-gray-900 tracking-tight"
+                className="text-5xl sm:text-6xl xl:text-7xl font-bold text-gray-900 dark:text-white tracking-tight"
               >
                 Transform Your
-                <span className="text-blue-600"> Lead Generation</span>
+                <span className="text-purple-600 dark:text-purple-400"> Lead Generation</span>
               </motion.h1>
               <motion.p
                 variants={fadeInUp}
-                className="mt-6 text-lg sm:text-lg text-gray-600 leading-relaxed"
+                className="mt-6 text-lg sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed"
               >
                 Revolutionize your business with our AI-powered lead generation platform that's easy to use, delivers ROI in no time, and transforms customer happiness into your competitive edge. <br /> Find, connect, and convert high-quality prospects with unprecedented efficiency.
               </motion.p>
@@ -69,14 +69,14 @@ export default function Landing() {
               >
                 <button
                   onClick={() => navigate('/signup')}
-                  className="inline-flex items-center px-8 py-4 text-lg font-medium rounded-xl shadow-xl text-white bg-blue-600 hover:bg-blue-700 transition-all hover:shadow-blue-500/20 transform hover:-translate-y-1"
+                  className="inline-flex items-center px-8 py-4 text-lg font-medium rounded-xl shadow-xl text-white bg-purple-600 hover:bg-purple-700 transition-all hover:shadow-purple-500/20 transform hover:-translate-y-1"
                 >
                   Start Free Trial
                   <ArrowRight className="ml-2 w-6 h-6" />
                 </button>
                 <button
                   onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="inline-flex items-center px-8 py-4 text-lg font-medium rounded-xl text-gray-700 bg-white hover:bg-gray-50 transition-all shadow-lg transform hover:-translate-y-1"
+                  className="inline-flex items-center px-8 py-4 text-lg font-medium rounded-xl text-gray-700 bg-white hover:bg-gray-50 dark:text-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 transition-all shadow-lg transform hover:-translate-y-1"
                 >
                   Learn More
                 </button>
@@ -95,10 +95,10 @@ export default function Landing() {
                   <motion.div
                     key={stat.label}
                     whileHover={{ scale: 1.05 }}
-                    className="text-center p-4 bg-white rounded-xl shadow-lg"
+                    className="text-center p-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg"
                   >
-                    <p className="text-3xl font-bold text-blue-600">{stat.value}</p>
-                    <p className="text-sm text-gray-600 mt-1">{stat.label}</p>
+                    <p className="text-3xl font-bold text-purple-600 dark:text-purple-400">{stat.value}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{stat.label}</p>
                   </motion.div>
                 ))}
               </motion.div>
@@ -116,7 +116,7 @@ export default function Landing() {
                   alt="Dashboard Preview"
                   className="w-full rounded-2xl"
                 />
-                <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-tr from-purple-600/20 to-transparent"></div>
               </div>
             </motion.div>
           </div>
@@ -124,7 +124,7 @@ export default function Landing() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-32 bg-white">
+      <section id="features" className="py-32 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -133,7 +133,7 @@ export default function Landing() {
             className="text-center max-w-3xl mx-auto"
           >
             <GradientText
-              colors={['#2563EB', "#4079ff", '#ED184F', "#4079ff", '#ED184F', '#2563EB']}
+              colors={['#9333EA', "#4079ff", '#ED184F', "#4079ff", '#ED184F', '#9333EA']}
               animationSpeed={8}
               showBorder={false}
             >
@@ -142,7 +142,7 @@ export default function Landing() {
               </h2>
             </GradientText>
             
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-600 dark:text-gray-300">
               Everything you need to supercharge your lead generation process and drive business growth
             </p>
           </motion.div>
@@ -187,13 +187,13 @@ export default function Landing() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -20 }}
-                className="relative p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all border border-gray-100 group"
+                className="relative p-8 bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-all border border-gray-100 dark:border-gray-700 group"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-transparent dark:from-purple-900 dark:to-gray-900 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
                 <div className="relative">
-                  <feature.icon className="h-12 w-12 text-blue-600 mb-6" />
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">{feature.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+                  <feature.icon className="h-12 w-12 text-purple-600 dark:text-purple-400 mb-6" />
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">{feature.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{feature.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -202,7 +202,7 @@ export default function Landing() {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-32 bg-gray-50">
+      <section className="py-32 bg-gray-50 dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -211,7 +211,7 @@ export default function Landing() {
             className="text-center max-w-3xl mx-auto mb-20"
           >
             <GradientText
-              colors={['#2563EB', "#4079ff", '#ED184F', "#4079ff", '#ED184F', '#2563EB']}
+              colors={['#9333EA', "#4079ff", '#ED184F', "#4079ff", '#ED184F', '#9333EA']}
               animationSpeed={8}
               showBorder={false}
             >
@@ -220,7 +220,7 @@ export default function Landing() {
               </h2>
             </GradientText>
             
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-600 dark:text-gray-300">
               Get started in minutes with our simple three-step process
             </p>
           </motion.div>
@@ -252,7 +252,7 @@ export default function Landing() {
                 className="text-center"
               >
                 <div className="relative">
-                  <div className="w-20 h-20 mx-auto bg-blue-600 rounded-full flex items-center justify-center mb-6">
+                  <div className="w-20 h-20 mx-auto bg-purple-600 rounded-full flex items-center justify-center mb-6">
                     <step.icon className="w-10 h-10 text-white " />
                   </div>
                   {index < 2 && (
@@ -262,15 +262,15 @@ export default function Landing() {
                         whileInView={{ width: '100%' }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.5, duration: 0.8 }}
-                        className="h-1 bg-blue-200"
+                        className="h-1 bg-purple-200"
                       >
-                        <ChevronsRightIcon className="w-8 h-8 text-blue-300 absolute -top-3.5 left-72 transform " />
+                        <ChevronsRightIcon className="w-8 h-8 text-purple-300 absolute -top-3.5 left-72 transform " />
                       </motion.div>
                     </div>
                   )}
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">{step.title}</h3>
-                <p className="text-gray-600">{step.description}</p>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">{step.title}</h3>
+                <p className="text-gray-600 dark:text-gray-300">{step.description}</p>
               </motion.div>
             ))}
           </div>
@@ -278,7 +278,7 @@ export default function Landing() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-32 bg-white">
+      <section className="py-32 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -287,7 +287,7 @@ export default function Landing() {
             className="text-center max-w-3xl mx-auto mb-20"
           >
             <GradientText
-              colors={['#2563EB', "#4079ff", '#ED184F', "#4079ff", '#ED184F', '#2563EB']}
+              colors={['#9333EA', "#4079ff", '#ED184F', "#4079ff", '#ED184F', '#9333EA']}
               animationSpeed={8}
               showBorder={false}
             >
@@ -296,7 +296,7 @@ export default function Landing() {
               </h2>
             </GradientText>
             
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-600 dark:text-gray-300">
               Join thousands of satisfied customers who have transformed their lead generation process
             </p>
           </motion.div>
@@ -332,9 +332,37 @@ export default function Landing() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2 }}
                 whileHover={{ y: -20 }}
-                className="relative bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all border border-gray-100 group" 
+                className="relative bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all border border-gray-100 dark:border-gray-700 group" 
               >
-                <div className='absolute inset-0 bg-gradient-to-br from-blue-50 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity'/>
+                <div className='absolute inset-0 bg-gradient-to-br from-purple-50 to-transparent dark:from-purple-900 dark:to-gray-900 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity'/>
+                <div className="relative flex flex-col items-start space-y-6 mb-6">
+                  <div className='flex '>
+                    <div>
+                      <img
+                        src={testimonial.image}
+                        alt={testimonial.name}
+                        className="w-16 h-16 rounded-full object-cover"
+                      />
+                    </div>
+                    
+                    <div className="ml-4">
+                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{testimonial.name}</h3>
+                      <p className="text-gray-600 dark:text-gray-400">{testimonial.role}</p>
+                      <p className="text-gray-500 dark:text-gray-300 text-sm">{testimonial.company}</p>
+                    </div>
+                  </div>
+                  
+                  <div className="">
+                    <p className=" text-gray-600 dark:text-gray-300 z-50 italic">{testimonial.quote}</p>
+                  </div>
+                </div>
+                
+                <div className="mt-4 flex text-yellow-400">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 fill-current z-10" />
+                  ))}
+                </div>
+                {/* <div className='absolute inset-0 bg-gradient-to-br from-purple-50 to-transparent dark:from-purple-900 dark:to-gray-900 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity'/>
                 <div className="relative flex items-center mb-6">
                   <img
                     src={testimonial.image}
@@ -342,17 +370,17 @@ export default function Landing() {
                     className="w-16 h-16 rounded-full object-cover"
                   />
                   <div className="ml-4">
-                    <h3 className="text-lg font-semibold text-gray-900">{testimonial.name}</h3>
-                    <p className="text-gray-600">{testimonial.role}</p>
-                    <p className="text-gray-500 text-sm">{testimonial.company}</p>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{testimonial.name}</h3>
+                    <p className="text-gray-600 dark:text-gray-400">{testimonial.role}</p>
+                    <p className="text-gray-500 dark:text-gray-300 text-sm">{testimonial.company}</p>
                   </div>
                 </div>
-                <p className="text-gray-600 italic">{testimonial.quote}</p>
+                <p className="text-gray-600 dark:text-gray-300 z-50 italic">{testimonial.quote}</p>
                 <div className="mt-4 flex text-yellow-400">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-current" />
+                    <Star key={i} className="w-5 h-5 fill-current z-50" />
                   ))}
-                </div>
+                </div> */}
               </motion.div>
             ))}
           </div>
@@ -360,7 +388,7 @@ export default function Landing() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-blue-600 to-blue-700">
+      <section className="py-20 bg-gradient-to-br from-purple-600 to-purple-700 dark:from-purple-900 dark:to-gray-800">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -370,7 +398,7 @@ export default function Landing() {
           <h2 className="text-4xl font-bold text-white mb-6">
             Ready to Transform Your Lead Generation?
           </h2>
-          <p className="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
+          <p className="text-xl text-purple-100 mb-10 max-w-2xl mx-auto">
             Join thousands of businesses already using our platform to drive growth and success
           </p>
           <motion.div
@@ -380,7 +408,7 @@ export default function Landing() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => navigate('/signup')}
-              className="px-8 py-4 text-lg font-medium rounded-xl bg-white text-blue-600 hover:bg-blue-50 transition-all shadow-lg transform hover:-translate-y-1"
+              className="px-8 py-4 text-lg font-medium rounded-xl bg-white text-purple-600 hover:bg-purple-50 transition-all shadow-lg transform hover:-translate-y-1"
             >
               Start Free Trial
             </motion.button>

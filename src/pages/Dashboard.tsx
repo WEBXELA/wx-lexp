@@ -146,7 +146,7 @@ export default function Dashboard() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-4">
-              <Search className="w-8 h-8 text-blue-600" />
+              <Search className="w-8 h-8 text-purple-600" />
               <h1 className="text-xl font-bold text-gray-900">LEXP</h1>
             </div>
             <button
@@ -187,7 +187,7 @@ export default function Dashboard() {
                   onClick={() => handleFilterChange('platform', key)}
                   className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all ${
                     filters.platform === key
-                      ? 'bg-blue-600 text-white shadow-lg'
+                      ? 'bg-purple-600 text-white shadow-lg'
                       : 'bg-white text-gray-700 hover:bg-gray-50'
                   }`}
                 >
@@ -208,7 +208,7 @@ export default function Dashboard() {
         {/* Loading State */}
         {isLoading && (
           <div className="flex flex-col items-center justify-center py-12">
-            <div className="w-12 h-12 border-t-2 border-b-2 border-blue-600 rounded-full animate-spin mb-4" />
+            <div className="w-12 h-12 border-t-2 border-b-2 border-purple-600 rounded-full animate-spin mb-4" />
             <p className="text-gray-600">Searching for profiles...</p>
           </div>
         )}
@@ -245,7 +245,7 @@ export default function Dashboard() {
                   whileHover={{ scale: 1.02, y: -2 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={handleShowMore}
-                  className="flex items-center space-x-2 px-6 py-3 bg-white text-blue-600 border border-blue-200 rounded-xl hover:bg-blue-50 transition-all duration-200 shadow-sm hover:shadow-md font-medium"
+                  className="flex items-center space-x-2 px-6 py-3 bg-white text-purple-600 border border-purple-200 rounded-xl hover:bg-purple-50 transition-all duration-200 shadow-sm hover:shadow-md font-medium"
                 >
                   <ChevronDown className="w-5 h-5" />
                   <span>Show More Profiles</span>
@@ -279,8 +279,8 @@ export default function Dashboard() {
             animate={{ opacity: 1, y: 0 }}
             className="text-center py-12"
           >
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-100 mb-4">
-              <Search className="w-8 h-8 text-blue-600" />
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-purple-100 mb-4">
+              <Search className="w-8 h-8 text-purple-600" />
             </div>
             <h3 className="text-lg font-medium text-gray-900 mb-2">Start your search</h3>
             <p className="text-gray-600 max-w-md mx-auto">
@@ -346,7 +346,7 @@ export default function Dashboard() {
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.1 }}
-                        className="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-50 transition-colors"
+                        className="flex items-center space-x-3 p-3 rounded-lg hover:bg-purple-50 transition-colors"
                       >
                         <div className="w-6 h-6 rounded-full gradient-bg flex items-center justify-center flex-shrink-0">
                           <Check className="w-4 h-4 text-white" />
@@ -371,7 +371,7 @@ export default function Dashboard() {
                         setShowUpgradeModal(false);
                         navigate('/contact');
                       }}
-                      className="px-8 py-3 rounded-xl text-white font-medium shadow-lg hover:shadow-blue-500/20 transition-all duration-200 gradient-bg"
+                      className="px-8 py-3 rounded-xl text-white font-medium shadow-lg hover:shadow-purple-500/20 transition-all duration-200 gradient-bg"
                     >
                       Contact Sales
                     </motion.button>

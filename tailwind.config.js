@@ -1,8 +1,23 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  darkMode: 'class',
   theme: {
     extend: {
+      // keyframes: {
+      //   "accordion-down": {
+      //     from: { height: "0" },
+      //     to: { height: "var(--radix-accordion-content-height)" },
+      //   },
+      //   "accordion-up": {
+      //     from: { height: "var(--radix-accordion-content-height)" },
+      //     to: { height: "0" },
+      //   },
+      // },
+      // animation: {
+      //   "accordion-down": "accordion-down 0.2s ease-out",
+      //   "accordion-up": "accordion-up 0.2s ease-out",
+      // },
       fontFamily: {
         sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
         heading: ['Montserrat', 'system-ui', 'sans-serif'],
@@ -33,6 +48,8 @@ export default {
           900: '#744a15',
         }
       },
+      darkBg: '#1a2435',
+      darkText: '#a0aec0',
       boxShadow: {
         'glow': '0 0 30px -5px rgba(0, 0, 0, 0.15)',
         'glow-lg': '0 0 50px -12px rgba(0, 0, 0, 0.25)',
