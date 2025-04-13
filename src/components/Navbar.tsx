@@ -56,17 +56,7 @@ export default function Navbar() {
               <span>Contact</span>
             </Link>
 
-            {/* Theme Toggle Button */}
-            <button
-              onClick={toggleTheme}
-              className='p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition duration-300'
-            >
-              {theme === 'light' ? (
-                <Moon className='w-6 h-6 text-purple-800' />
-              ) : (
-                <Sun className='w-6 h-6 text-yellow-400' />
-              )}
-            </button>
+            
 
             {/* Dashboard or Sign Out Button */}
             {!isDashboard ? (
@@ -84,6 +74,18 @@ export default function Navbar() {
                 Sign Out
               </Link>
             )}
+
+            {/* Theme Toggle Button */}
+            <button
+              onClick={toggleTheme}
+              className='p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition duration-300'
+            >
+              {theme === 'light' ? (
+                <Moon className='w-6 h-6 text-purple-800' />
+              ) : (
+                <Sun className='w-6 h-6 text-yellow-400' />
+              )}
+            </button>
           </div>
         </div>
       </div>
