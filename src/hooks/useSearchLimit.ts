@@ -13,7 +13,7 @@ export function useSearchLimit() {
   const [searchCount, setSearchCount] = useState(0);
   const [lastSearch, setLastSearch] = useState<string | null>(null);
   const [lastReset, setLastReset] = useState<string | null>(null);
-  const [hasSubscription, setHasSubscription] = useState(true);
+  const [hasSubscription, setHasSubscription] = useState(false);
 
   useEffect(() => {
     checkLimits();
@@ -61,7 +61,7 @@ export function useSearchLimit() {
       }
 
       // TODO: Check subscription status
-      setHasSubscription(true);
+      setHasSubscription(false); // Replace with actual subscription check
 
     } catch (err) {
       console.error('Error checking limits:', err);
