@@ -126,7 +126,7 @@ export default function Landing() {
               >
                 <RotatingText
                   texts={['SuperCharge', 'Elevate', 'Accelerate', 'Transform']}
-                  mainClassName="px-2 sm:px-2 md:px-3 bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-500 text-black overflow-hidden py-0.5 sm:py-1 md:py-2 rounded-2xl w-fit"
+                  mainClassName="px-2 sm:px-2 md:px-3 bg-gradient-to-r from-purple-500 to-blue-400 text-black overflow-hidden py-0.5 sm:py-1 md:py-2 rounded-2xl w-fit"
                   staggerFrom={"last"}
                   initial={{ y: "100%" }}
                   animate={{ y: 0 }}
@@ -156,7 +156,7 @@ export default function Landing() {
               >
                 <button
                   onClick={() => navigate('/signup')}
-                  className="inline-flex items-center px-8 py-4 text-lg font-medium rounded-full shadow-full text-white bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-500 hover:bg-purple-600 hover:via-pink-600 hover:to-yellow-600 transition-all hover:shadow-lg  transform hover:-translate-y-1"
+                  className="inline-flex items-center px-8 py-4 text-lg font-medium rounded-full shadow-full text-white bg-gradient-to-r from-purple-500 to-blue-400 hover:bg-purple-600 hover:via-pink-600 hover:to-yellow-600 transition-all hover:shadow-lg  transform hover:-translate-y-1"
                 >
                   Start Free Trial
                   <ChevronsRightIcon className="ml-2 w-6 h-6" />
@@ -182,7 +182,7 @@ export default function Landing() {
                   <motion.div
                     key={stat.label}
                     whileHover={{ scale: 1.05 }}
-                    className="text-center p-4 bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-500 rounded-xl shadow-lg"
+                    className="text-center p-4 bg-gradient-to-r from-purple-500 to-blue-400 rounded-xl shadow-lg"
                   >
                     <p className="text-3xl font-bold text-white">{stat.value}</p>
                     <p className="text-sm text-yellow-200 mt-1">{stat.label}</p>

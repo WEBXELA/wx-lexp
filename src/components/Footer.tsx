@@ -56,7 +56,7 @@ export default function Footer() {
             <ul className="mt-4 space-y-4">
               <li className="flex items-center space-x-3 text-gray-600 dark:text-gray-300">
                 <Mail className="w-5 h-5" />
-                <span>support@lexp.com</span>
+                <span>sales@webxela.com</span>
               </li>
               <li className="flex items-center space-x-3 text-gray-600 dark:text-gray-300">
                 <Phone className="w-5 h-5" />
