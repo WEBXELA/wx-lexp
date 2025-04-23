@@ -28,9 +28,7 @@ function extractImage(item: any): string {
   ];
   
   // // Return the first valid image URL
-  const profileImage = possibleImages.find(img => img && img.startsWith('http'));
-  console.log(profileImage);
-  
+  const profileImage = possibleImages.find(img => img && img.startsWith('http'));  
   
   // // If no valid profile image is found, return an empty string
   return profileImage || '';
