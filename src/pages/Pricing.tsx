@@ -1,7 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Check, X } from 'lucide-react';
+import { Check, ChevronDown, X } from 'lucide-react';
+import GradientText from '../components/GradientText';
+import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material';
 
 const plans = [
   {
@@ -73,15 +75,22 @@ export default function Pricing() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Header */}
-      <div className="bg-white">
+      <div className="bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">
-              Simple, transparent pricing
-            </h1>
-            <p className="mt-4 text-xl text-gray-500">
+            <GradientText
+              colors={['#9333EA', "#4079ff", '#ED184F', "#4079ff", '#9333EA']}
+              animationSpeed={8}
+              showBorder={false}
+            >
+              <h1 className="text-4xl font-extrabold mb-1 sm:text-5xl sm:tracking-tight lg:text-6xl">
+                Simple, transparent pricing
+              </h1>
+            </GradientText>
+            
+            <p className="mt-4 text-xl text-gray-500 dark:text-gray-300">
               Choose the perfect plan for your lead generation needs
             </p>
           </div>
@@ -97,15 +106,15 @@ export default function Pricing() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className={`rounded-lg shadow-lg divide-y divide-gray-200 bg-white ${
+              className={`rounded-lg shadow-lg divide-y divide-gray-200 dark:divide-gray-700 bg-white dark:bg-gray-800 ${
                 plan.popular
-                  ? 'border-2 border-blue-500 relative'
-                  : 'border border-gray-200'
+                  ? 'border-2 border-purple-500 relative'
+                  : 'border border-gray-200 dark:border-gray-700'
               }`}
             >
               {plan.popular && (
                 <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2">
-                  <span className="inline-flex rounded-full bg-blue-600 px-4 py-1 text-sm font-semibold text-white">
+                  <span className="inline-flex rounded-full bg-purple-600 px-4 py-1 text-sm font-semibold text-white">
                     Popular
                   </span>
                 </div>
@@ -114,13 +123,13 @@ export default function Pricing() {
                 <h2 className="text-2xl font-semibold leading-6 text-gray-900">
                   {plan.name}
                 </h2>
-                <p className="mt-4 text-sm text-gray-500">{plan.description}</p>
+                <p className="mt-4 text-sm text-gray-500 dark:text-gray-300">{plan.description}</p>
                 <p className="mt-8">
-                  <span className="text-4xl font-extrabold text-gray-900">
+                  <span className="text-4xl font-extrabold text-gray-900 dark:text-white">
                     {plan.price}
                   </span>
                   {plan.period && (
-                    <span className="text-base font-medium text-gray-500">
+                    <span className="text-base font-medium text-gray-500 dark:text-gray-300">
                       /month
                     </span>
                   )}
@@ -131,28 +140,28 @@ export default function Pricing() {
                   onClick={() => handlePlanSelection(plan.name)}
                   className={`mt-8 w-full rounded-lg px-4 py-2 text-sm font-semibold ${
                     plan.popular
-                      ? 'bg-blue-600 text-white hover:bg-blue-700'
-                      : 'bg-blue-50 text-blue-700 hover:bg-blue-100'
+                      ? 'bg-purple-600 text-white hover:bg-purple-700'
+                      : 'bg-purple-50 text-purple-700 hover:bg-purple-100'
                   } transition-colors`}
                 >
                   {plan.buttonText}
                 </motion.button>
               </div>
               <div className="px-6 pt-6 pb-8">
-                <h3 className="text-xs font-semibold text-gray-900 tracking-wide uppercase">
+                <h3 className="text-xs font-semibold text-gray-900 dark:text-white tracking-wide uppercase">
                   What's included
                 </h3>
                 <ul className="mt-6 space-y-4">
                   {plan.features.map((feature) => (
                     <li key={feature} className="flex space-x-3">
                       <Check className="h-5 w-5 text-green-500 flex-shrink-0" />
-                      <span className="text-sm text-gray-500">{feature}</span>
+                      <span className="text-sm text-gray-500 dark:text-gray-300">{feature}</span>
                     </li>
                   ))}
                   {plan.limitations?.map((limitation) => (
                     <li key={limitation} className="flex space-x-3">
                       <X className="h-5 w-5 text-red-500 flex-shrink-0" />
-                      <span className="text-sm text-gray-500">{limitation}</span>
+                      <span className="text-sm text-gray-500 dark:text-gray-300">{limitation}</span>
                     </li>
                   ))}
                 </ul>
@@ -163,12 +172,19 @@ export default function Pricing() {
       </div>
 
       {/* FAQ Section */}
-      <div className="bg-white">
+      <div className="bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-extrabold text-gray-900 text-center mb-12">
-            Frequently asked questions
-          </h2>
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+          <GradientText
+            colors={['#9333EA', "#4079ff", '#ED184F', "#4079ff", '#9333EA']}
+            animationSpeed={8}
+            showBorder={false}
+          >
+            <h2 className="text-3xl font-extrabold text-center mb-12">
+              Frequently asked questions
+            </h2>
+          </GradientText>
+          
+          <div className="space-y-8 rounded-full">
             {[
               {
                 question: 'What happens when I reach my search limit?',
@@ -191,11 +207,46 @@ export default function Pricing() {
                   'We accept all major credit cards, PayPal, and bank transfers for Enterprise plans.',
               },
             ].map((faq) => (
-              <div key={faq.question}>
-                <h3 className="text-lg font-medium text-gray-900">
-                  {faq.question}
-                </h3>
-                <p className="mt-2 text-base text-gray-500">{faq.answer}</p>
+              <div key={faq.question} className='rounded-full'>
+                <Accordion 
+                  key={faq.question} 
+                  className="mb-4 border border-purple-200 rounded-lg dark:rounded-none shadow-sm dark:border-gray-700"
+                  sx={{
+                    backgroundColor: 'purple.500',
+                    '&:before': { display: 'none' }, // Remove the default Material-UI divider
+                  }}
+                >
+                  <AccordionSummary
+                    expandIcon={<ChevronDown className="h-8 w-8 text-purple-500 dark:text-gray-900" />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                    className='px-4 py-2 hover:bg-purple-50 dark:hover:bg-gray-700 rounded-lg dark:rounded-none'
+                    sx={{
+                      '& .MuiAccordionSummary-content': {
+                        margin: 0,
+                      },
+                    }}
+                  >
+                    <Typography 
+                      className='text-lg font-semibold text-gray-900 dark:text-black'
+                      sx={{
+                        fontSize: '1rem',
+                        fontWeight: 600,
+                      }}
+                    >
+                      {faq.question}
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails
+                    className='px-4 py-2 bg-purple-50 dark:bg-gray-800 rounded-lg dark:rounded-none'
+                    sx={{
+                      color: 'gray',
+                      fontSize: '0.875rem',
+                    }}
+                  >
+                      {faq.answer}
+                  </AccordionDetails>
+                </Accordion>
               </div>
             ))}
           </div>

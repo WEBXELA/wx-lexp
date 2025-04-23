@@ -16,7 +16,7 @@ export default function AuthLayout({ children, title }: AuthLayoutProps) {
         className="sm:mx-auto sm:w-full sm:max-w-md"
       >
         <div className="flex justify-center">
-          <Users className="w-12 h-12 text-blue-600" />
+          <Users className="w-12 h-12 text-purple-600" />
         </div>
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
           {title}
