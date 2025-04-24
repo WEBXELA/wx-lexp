@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ChevronDown, ChevronUp, Lock, Check, X } from 'lucide-react';
 import { FaLinkedin, FaInstagram, FaFacebook, FaXTwitter } from 'react-icons/fa6';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -22,13 +22,13 @@ export default function ProfileList({ profiles, platform }: Props) {
   const getPlatformText = (platform: string) => {
     switch (platform) {
       case 'linkedin':
-        return <FaLinkedin className='w-6 h-6'/>;
+        return <FaLinkedin className='w-6 h-6' />;
       case 'instagram':
-        return <FaInstagram className='w-6 h-6'/>;
+        return <FaInstagram className='w-6 h-6' />;
       case 'facebook':
-        return <FaFacebook className='w-6 h-6'/>;
+        return <FaFacebook className='w-6 h-6' />;
       case 'twitter':
-        return <FaXTwitter className='w-6 h-6'/>;
+        return <FaXTwitter className='w-6 h-6' />;
       default:
         return 'Profile';
     }
@@ -48,7 +48,7 @@ export default function ProfileList({ profiles, platform }: Props) {
 
   return (
     <>
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         className="mt-8 space-y-4"
@@ -63,8 +63,8 @@ export default function ProfileList({ profiles, platform }: Props) {
           >
             <div className="flex items-start space-x-4">
               {shouldShowImage(platform) && (
-                <img 
-                  src={profile.profileImageUrl} 
+                <img
+                  src={profile.profileImageUrl}
                   alt={profile.fullName}
                   className="w-16 h-16 rounded-full object-cover"
                 />
@@ -81,11 +81,11 @@ export default function ProfileList({ profiles, platform }: Props) {
                     )}
 
                     {profile.company && (
-                        <p className='text-gray-600'>{profile.company}</p>
+                      <p className='text-gray-600'>{profile.company}</p>
                     )}
-                  </div>
 
-                  <div className=''>
+                  </div>
+                  <div className='flex flex-col gap-3 justify-center items-center'>
                     <div className='flex flex-col items-end space-y-2'>
                       <button
                         onClick={() => toggleProfile(profile.link)}
@@ -98,9 +98,12 @@ export default function ProfileList({ profiles, platform }: Props) {
                         )}
                       </button>
                     </div>
-                    
-                    <div className='flex flex-col items-end justify-start space-y-2'>
-                      {/* {profile.currentPosition && (
+                    <a href={`${profile.link}`} target='_blank'>
+                      <FaLinkedin className='text-[#0077b5] w-6 h-6' />
+                    </a>
+
+                    {/* <div className='flex flex-col items-end justify-start space-y-2'>
+                      {profile.currentPosition && (
                         <p className="text-gray-600 flex"><Briefcase className='w-5 h-5 mr-2' />{profile.currentPosition || profile.company}</p>
                       )}     */}
                       <button
@@ -115,7 +118,7 @@ export default function ProfileList({ profiles, platform }: Props) {
                     </div>
                   </div>
                 </div>
-                
+
                 {/* <div className="mt-4 space-y-2">
                   {profile.company && (
                     <div className="flex items-center space-x-2 text-gray-600">
@@ -154,12 +157,7 @@ export default function ProfileList({ profiles, platform }: Props) {
                       {profile.about && (
                         <div className="mb-4 space-y-1">
                           <h4 className="text-base font-semibold text-gray-700">About: <span className='font-medium text-sm'>{profile.about}</span></h4>
-                          {/* <h4 className='text-base font-semibold text-gray-700'>Location: <span className='font-medium text-sm'>{profile.location}</span></h4> */}
                           <h4 className='text-base font-semibold text-gray-700'>Experience: <span className='font-medium text-sm'>{profile.currentPosition} {profile.company}</span></h4>
-                          {/* <h4 className='text-base font-semibold text-gray-700'>Education: <span className='font-medium text-sm'>{profile.education}</span></h4> */}
-                          {/* <h4 className='text-base font-semibold text-gray-700'>Certification: <span className='font-medium text-sm'>{profile.certification.join(', ')}</span></h4> */}
-                          {/* <h4 className='text-base font-semibold text-gray-700'>Skills: <span className='font-medium text-sm'>{profile.skills.join(', ')}</span></h4> */}
-                          {/* <h4 className='text-base font-semibold text-gray-700'>Phone Number: <span className='font-medium text-sm'>{profile.phoneNumber}</span></h4> */}
                         </div>
                       )}
 
