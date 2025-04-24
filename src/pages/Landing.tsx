@@ -113,20 +113,23 @@ export default function Landing() {
           className="absolute inset-0 bg-gradient-to-br from-purple-300 via-pink-200 to-yellow-200 dark:from-purple-900 dark:to-gray-800"
         />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="lg:grid lg:grid-cols-1 lg:gap-8">
+          <div className="lg:grid lg:grid-cols-1 lg:gap-8 items-center">
             <motion.div
               initial="initial"
               animate="animate"
               variants={stagger}
               className="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-center"
+              // className="text-center lg:text-left md:max-w-2xl md:mx-auto lg:mx-0"
             >
               <motion.h1
                 variants={fadeInUp}
-                className="text-5xl sm:text-6xl xl:text-7xl font-bold text-gray-900 dark:text-white tracking-tight flex flex-col justify-center items-center"
+                // className="text-5xl sm:text-6xl xl:text-7xl font-bold text-gray-900 dark:text-white tracking-tight flex flex-col justify-center items-center"
+                className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 dark:text-white tracking-tight flex flex-col justify-center items-center"
               >
                 <RotatingText
                   texts={['SuperCharge', 'Elevate', 'Accelerate', 'Transform']}
-                  mainClassName="px-2 sm:px-2 md:px-3 bg-gradient-to-r from-purple-500 to-blue-400 text-black overflow-hidden py-0.5 sm:py-1 md:py-2 rounded-2xl w-fit"
+                  // mainClassName="px-2 sm:px-2 md:px-3 bg-gradient-to-r from-purple-500 to-blue-400 text-black overflow-hidden py-0.5 sm:py-1 md:py-2 rounded-2xl w-fit"
+                  mainClassName="px-2 sm:px-3 bg-gradient-to-r from-purple-500 to-blue-400 text-black overflow-hidden py-1 sm:py-2 rounded-2xl w-fit"
                   staggerFrom={"last"}
                   initial={{ y: "100%" }}
                   animate={{ y: 0 }}
@@ -135,14 +138,16 @@ export default function Landing() {
                   splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
                   transition={{ type: "spring", damping: 30, stiffness: 400 }}
                   rotationInterval={3000}
-                /> Your <br />
+                /> {' '}
+                Your <br />
                 <span className="text-purple-600 dark:text-purple-400"> Lead Generation</span>
               </motion.h1>
               <motion.p
                 variants={fadeInUp}
-                className="mt-6 text-lg sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed"
+                // className="mt-6 text-lg sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed"
+                className="mt-6 text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-300 leading-relaxed"
               >
-                Revolutionize your business with our <span className='text-purple-500 font-bold'>AI-powered</span> lead generation platform that's easy to use, delivers ROI, and transforms customer happiness into your competitive edge.
+                Revolutionize your business with our {' '} <span className='text-purple-500 font-bold'>AI-powered</span> lead generation platform that's easy to use, delivers ROI, and transforms customer happiness into your competitive edge.
               </motion.p>
               {/* <motion.p
                 variants={fadeInUp}
@@ -152,18 +157,21 @@ export default function Landing() {
               </motion.p> */}
               <motion.div
                 variants={fadeInUp}
-                className="mt-10 sm:mt-12 space-x-6"
+                // className="mt-10 sm:mt-12 space-x-6"
+                className="mt-10 sm:mt-12 flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6"
               >
                 <button
                   onClick={() => navigate('/signup')}
-                  className="inline-flex items-center px-8 py-4 text-lg font-medium rounded-full shadow-full text-white bg-gradient-to-r from-purple-500 to-blue-400 hover:bg-purple-600 hover:via-pink-600 hover:to-yellow-600 transition-all hover:shadow-lg  transform hover:-translate-y-1"
+                  // className="inline-flex items-center mb-3 px-8 py-4 text-lg font-medium rounded-full shadow-full text-white bg-gradient-to-r from-purple-500 to-blue-400 hover:bg-purple-600 hover:via-pink-600 hover:to-yellow-600 transition-all hover:shadow-lg  transform hover:-translate-y-1"
+                  className="inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-medium rounded-full shadow-lg text-white bg-gradient-to-r from-purple-500 to-blue-400 hover:bg-purple-600 hover:via-pink-600 hover:to-yellow-600 transition-all hover:shadow-xl transform hover:-translate-y-1"
                 >
                   Start Free Trial
                   <ChevronsRightIcon className="ml-2 w-6 h-6" />
                 </button>
                 <button
                   onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="inline-flex items-center px-8 py-4 text-lg font-medium rounded-xl text-gray-700 border border-purple-500 bg-white hover:bg-gray-50 dark:text-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 transition-all shadow-lg transform hover:-translate-y-1"
+                  // className="inline-flex items-center px-8 py-4 text-lg font-medium rounded-xl text-gray-700 border border-purple-500 bg-white hover:bg-gray-50 dark:text-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 transition-all shadow-lg transform hover:-translate-y-1"
+                   className="inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-medium rounded-xl text-gray-700 border border-purple-500 bg-white hover:bg-gray-50 dark:text-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 transition-all shadow-lg transform hover:-translate-y-1"
                 >
                   Learn More
                 </button>
@@ -172,7 +180,8 @@ export default function Landing() {
               {/* Trust Indicators */}
               <motion.div
                 variants={fadeInUp}
-                className="mt-20 grid grid-cols-3 gap-8"
+                // className="mt-20 grid grid-cols-3 gap-8"
+                className="mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
               >
                 {[
                   { label: 'Active Users', value: '10,000+' },
@@ -182,10 +191,21 @@ export default function Landing() {
                   <motion.div
                     key={stat.label}
                     whileHover={{ scale: 1.05 }}
-                    className="text-center p-4 bg-gradient-to-r from-purple-500 to-blue-400 rounded-xl shadow-lg"
+                    // className="text-center p-4 bg-gradient-to-r from-purple-500 to-blue-400 rounded-xl shadow-lg"
+                    className="text-center p-6 bg-gradient-to-r from-purple-500 to-blue-400 rounded-xl shadow-lg"
                   >
-                    <p className="text-3xl font-bold text-white">{stat.value}</p>
-                    <p className="text-sm text-yellow-200 mt-1">{stat.label}</p>
+                    <p 
+                      // className="text-3xl font-bold text-white"
+                      className="text-2xl sm:text-3xl font-bold text-white"
+                    >
+                      {stat.value}
+                    </p>
+                    <p 
+                      // className="text-sm text-yellow-200 mt-1"
+                      className="text-sm sm:text-base text-yellow-200 mt-2"
+                    >
+                      {stat.label}
+                    </p>
                   </motion.div>
                 ))}
               </motion.div>
