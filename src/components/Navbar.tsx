@@ -1,6 +1,7 @@
-import React from 'react';
+"use client"
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Search, Users, MessageSquare, Moon, Sun } from 'lucide-react';
+import { Search, Users, MessageSquare, Moon, Sun, Menu, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 import GradientText from './GradientText';
 import { useTheme } from '../context/ThemeContext';
@@ -10,6 +11,7 @@ export default function Navbar() {
   const location = useLocation();
   const isAuthPage = ['/login', '/signup'].includes(location.pathname);
   const isDashboard = location.pathname === '/dashboard';
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   if (isAuthPage) return null;
 
@@ -33,6 +35,18 @@ export default function Navbar() {
               </p>
             </div>
           </Link>
+
+          {/* Hamburger Menu for Mobile */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition duration-300"
+          >
+            {isMenuOpen ? (
+              <X className="w-6 h-6 text-gray-600 dark:text-gray-300" />
+            ) : (
+              <Menu className="w-6 h-6 text-gray-600 dark:text-gray-300" />
+            )}
+          </button>
           
           {/* Navigation Links */}
           <div className="hidden md:flex items-center space-x-8">
@@ -88,6 +102,50 @@ export default function Navbar() {
             </button>
           </div>
         </div>
+
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="md:hidden my-4 space-y-4">
+            <Link
+              to="/"
+              className="block text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition duration-300"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Home
+            </Link>
+            <Link
+              to="/pricing"
+              className="block text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition duration-300"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Pricing
+            </Link>
+            <Link
+              to="/contact"
+              className="block text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition duration-300"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Contact
+            </Link>
+            {!isDashboard ? (
+              <Link
+                to="/dashboard"
+                className="block px-6 py-2.5 text-sm font-medium text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition-all shadow-lg hover:shadow-purple-200"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Dashboard
+              </Link>
+            ) : (
+              <Link
+                to="/login"
+                className="block px-6 py-2.5 text-sm font-medium text-white bg-purple-600 dark:bg-purple-500 rounded-lg hover:bg-purple-700 dark:hover:bg-purple-600 transition-all shadow-lg hover:shadow-purple-200 dark:shadow-purple-800"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Sign Out
+              </Link>
+            )}
+          </div>
+        )}
       </div>
     </motion.header>
   );

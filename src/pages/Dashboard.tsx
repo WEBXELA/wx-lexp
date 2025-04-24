@@ -142,7 +142,8 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <header className="glass-effect fixed w-full z-50 border-b border-gray-200/80">
+      {/* Header */}
+      {/* <header className="glass-effect fixed w-full z-50 border-b border-gray-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-4">
@@ -158,12 +159,64 @@ export default function Dashboard() {
             </button>
           </div>
         </div>
+      </header> */}
+      <header className="glass-effect fixed w-full z-50 border-b border-gray-200/80 bg-white dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-evenly gap-28 sm:justify-between h-16 sm:h-20">
+            {/* Logo Section */}
+            <div className="flex items-center space-x-2">
+              <Search className="w-6 h-6 sm:w-8 sm:h-8 text-purple-600" />
+              <h1 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white bg-gradient-to-r from-purple-500 to-red-800 bg-clip-text text-transparent">
+                LEXP
+              </h1>
+            </div>
+            {/* Hamburger Menu for Mobile */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="md:hidden p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition duration-300"
+            >
+              {isMobileMenuOpen ? (
+                <X className="w-6 h-6 text-gray-600 dark:text-gray-300" />
+              ) : (
+                <Menu className="w-6 h-6 text-gray-600 dark:text-gray-300" />
+              )}
+            </button>
+
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-6">
+              <button
+                onClick={handleSignOut}
+                className="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition"
+              >
+                <LogOut className="w-4 h-4" />
+                <span>Sign Out</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+            <div className="flex flex-col space-y-4 p-4">
+              <button
+                onClick={handleSignOut}
+                className="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition"
+              >
+                <LogOut className="w-4 h-4" />
+                <span>Sign Out</span>
+              </button>
+            </div>
+          </div>
+        )}
       </header>
 
+      {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-8">
+        {/* Search Filters */}
         <div className="mb-8">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-2xl font-bold text-gray-900">Find Profiles</h2>
+          <div className="flex flex-col sm:flex-row md:flex-row justify-between items-center mb-4">
+            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900">Find Profiles</h2>
             {!hasSubscription && (
               <div className="flex items-center space-x-2 text-sm">
                 <Clock className="w-4 h-4 text-gray-500" />
@@ -216,8 +269,8 @@ export default function Dashboard() {
         {/* Search Results */}
         {searchResponse?.items && searchResponse.items.length > 0 && (
           <>
-            <div className="flex justify-between items-center mt-6 sm:mt-8">
-              <p className="text-gray-600">
+            <div className="flex flex-col sm:flex-row justify-between items-center mt-6 sm:mt-8 gap-4">
+              <p className="text-sm sm:text-base text-gray-600">
                 Found {searchResponse.totalResults} profiles
               </p>
               <motion.button
@@ -260,13 +313,13 @@ export default function Dashboard() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center py-12"
+            className="text-center py-12 px-4 sm:px-6"
           >
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 mb-4">
               <AlertCircle className="w-8 h-8 text-gray-400" />
             </div>
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No profiles found</h3>
-            <p className="text-gray-600 max-w-md mx-auto">
+            <h3 className="text-lg sm:text-xl font-medium text-gray-900 mb-2">No profiles found</h3>
+            <p className="text-sm sm:text-base text-gray-600 max-w-md mx-auto">
               Try adjusting your search criteria or using different keywords to find more results.
             </p>
           </motion.div>
@@ -277,13 +330,13 @@ export default function Dashboard() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center py-12"
+            className="text-center py-12 px-4 sm:px-6"
           >
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-purple-100 mb-4">
               <Search className="w-8 h-8 text-purple-600" />
             </div>
-            <h3 className="text-lg font-medium text-gray-900 mb-2">Start your search</h3>
-            <p className="text-gray-600 max-w-md mx-auto">
+            <h3 className="text-lg sm:text-xl font-medium text-gray-900 mb-2">Start your search</h3>
+            <p className="text-sm sm:text-base text-gray-600 max-w-md mx-auto">
               Enter your search criteria above to find relevant profiles across different platforms.
             </p>
           </motion.div>
@@ -304,7 +357,7 @@ export default function Dashboard() {
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.95, opacity: 0 }}
                 onClick={e => e.stopPropagation()}
-                className="relative max-w-2xl w-full bg-white rounded-2xl shadow-2xl overflow-hidden"
+                className="relative max-w-lg w-full bg-white rounded-2xl shadow-2xl overflow-hidden"
               >
                 {/* Close Button */}
                 <button
@@ -315,22 +368,22 @@ export default function Dashboard() {
                 </button>
 
                 {/* Modal Content */}
-                <div className="p-8">
+                <div className="p-8 sm:p-8">
                   {/* Header */}
-                  <div className="text-center mb-8">
-                    <div className="w-16 h-16 rounded-full gradient-bg flex items-center justify-center mx-auto mb-6">
-                      <Lock className="w-8 h-8 text-white" />
+                  <div className="text-center mb-6 sm:mb-8">
+                    <div className="w-16 h-16 sm:w-16 sm:h-16 rounded-full gradient-bg flex items-center justify-center mx-auto mb-4 sm:mb-6">
+                      <Lock className="w-8 h-8 sm:w-8 sm:h-8 text-white" />
                     </div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                    <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 sm:mb-3">
                       Unlock Premium Features
                     </h3>
-                    <p className="text-gray-600 max-w-md mx-auto">
+                    <p className="text-sm sm:txt-base text-gray-600 max-w-md mx-auto">
                       Upgrade to our premium plan to access unlimited exports, advanced filters, and exclusive features.
                     </p>
                   </div>
 
                   {/* Features Grid */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 sm:mb-8">
                     {[
                       'Unlimited exports',
                       'Advanced search filters',
@@ -351,15 +404,15 @@ export default function Dashboard() {
                         <div className="w-6 h-6 rounded-full gradient-bg flex items-center justify-center flex-shrink-0">
                           <Check className="w-4 h-4 text-white" />
                         </div>
-                        <span className="text-gray-700">{feature}</span>
+                        <span className="text-sm sm:text-base text-gray-700">{feature}</span>
                       </motion.div>
                     ))}
                   </div>
 
                   {/* Pricing */}
-                  <div className="text-center mb-8">
-                    <p className="text-sm text-gray-500 mb-2">Contact us for pricing</p>
-                    <p className="text-gray-600">Get a customized plan that fits your needs</p>
+                  <div className="text-center mb-6 sm:mb-8">
+                    <p className="text-xs sm:text-sm text-gray-500 mb-1 sm:mb-2">Contact us for pricing</p>
+                    <p className="text-sm sm:text-base text-gray-600">Get a customized plan that fits your needs</p>
                   </div>
 
                   {/* CTA Buttons */}
@@ -371,7 +424,7 @@ export default function Dashboard() {
                         setShowUpgradeModal(false);
                         navigate('/contact');
                       }}
-                      className="px-8 py-3 rounded-xl text-white font-medium shadow-lg hover:shadow-purple-500/20 transition-all duration-200 gradient-bg"
+                      className="px-6 sm:px-8 py-3 rounded-xl text-white font-medium shadow-lg hover:shadow-purple-500/20 transition-all duration-200 gradient-bg"
                     >
                       Contact Sales
                     </motion.button>
@@ -379,7 +432,7 @@ export default function Dashboard() {
                       whileHover={{ scale: 1.02, y: -2 }}
                       whileTap={{ scale: 0.98 }}
                       onClick={() => setShowUpgradeModal(false)}
-                      className="px-8 py-3 rounded-xl text-gray-700 font-medium border border-gray-200 hover:bg-gray-50 transition-all duration-200"
+                      className="px-6 sm:px-8 py-3 rounded-xl text-gray-700 font-medium border border-gray-200 hover:bg-gray-50 transition-all duration-200"
                     >
                       Maybe Later
                     </motion.button>
