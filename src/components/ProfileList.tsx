@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { ExternalLink, MapPin, Building, GraduationCap, Users, ChevronDown, ChevronUp, Lock, Check, X } from 'lucide-react';
-import { Briefcase, Linkedin } from 'lucide-react';
+import { ChevronDown, ChevronUp, Lock, Check, X } from 'lucide-react';
 import { FaLinkedin, FaInstagram, FaFacebook, FaXTwitter } from 'react-icons/fa6';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Profile } from '../types';
@@ -100,20 +99,20 @@ export default function ProfileList({ profiles, platform }: Props) {
                       </button>
                     </div>
                     
-                    {/* <div className='flex flex-col items-end justify-start space-y-2'>
-                      {profile.currentPosition && (
+                    <div className='flex flex-col items-end justify-start space-y-2'>
+                      {/* {profile.currentPosition && (
                         <p className="text-gray-600 flex"><Briefcase className='w-5 h-5 mr-2' />{profile.currentPosition || profile.company}</p>
-                      )}    
+                      )}     */}
                       <button
                         onClick={() => handleOpenProfile(profile.link)}
                         className="flex space-x-2 text-blue-600 hover:text-blue-600 py-1.5 rounded-md hover:bg-blue-50 transition-colors"
                       >
-                        <ExternalLink className="w-4 h-4" />
+                        {/* <ExternalLink className="w-4 h-4" /> */}
                         <span className="text-sm">{getPlatformText(platform)}</span>
                         <span className='hidden'>{getPlatformText(platform)}</span>
                         
                       </button>                  
-                    </div> */}
+                    </div>
                   </div>
                 </div>
                 
@@ -155,12 +154,12 @@ export default function ProfileList({ profiles, platform }: Props) {
                       {profile.about && (
                         <div className="mb-4 space-y-1">
                           <h4 className="text-base font-semibold text-gray-700">About: <span className='font-medium text-sm'>{profile.about}</span></h4>
-                          <h4 className='text-base font-semibold text-gray-700'>Location: <span className='font-medium text-sm'>{profile.location}</span></h4>
+                          {/* <h4 className='text-base font-semibold text-gray-700'>Location: <span className='font-medium text-sm'>{profile.location}</span></h4> */}
                           <h4 className='text-base font-semibold text-gray-700'>Experience: <span className='font-medium text-sm'>{profile.currentPosition} {profile.company}</span></h4>
-                          <h4 className='text-base font-semibold text-gray-700'>Education: <span className='font-medium text-sm'>{profile.education}</span></h4>
-                          <h4 className='text-base font-semibold text-gray-700'>Certification: <span className='font-medium text-sm'>{profile.certification.join(', ')}</span></h4>
-                          <h4 className='text-base font-semibold text-gray-700'>Skills: <span className='font-medium text-sm'>{profile.skills.join(', ')}</span></h4>
-                          <h4 className='text-base font-semibold text-gray-700'>Phone Number: <span className='font-medium text-sm'>{profile.phoneNumber}</span></h4>
+                          {/* <h4 className='text-base font-semibold text-gray-700'>Education: <span className='font-medium text-sm'>{profile.education}</span></h4> */}
+                          {/* <h4 className='text-base font-semibold text-gray-700'>Certification: <span className='font-medium text-sm'>{profile.certification.join(', ')}</span></h4> */}
+                          {/* <h4 className='text-base font-semibold text-gray-700'>Skills: <span className='font-medium text-sm'>{profile.skills.join(', ')}</span></h4> */}
+                          {/* <h4 className='text-base font-semibold text-gray-700'>Phone Number: <span className='font-medium text-sm'>{profile.phoneNumber}</span></h4> */}
                         </div>
                       )}
 

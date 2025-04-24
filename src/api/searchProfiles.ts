@@ -22,13 +22,14 @@ function extractProfileUrl(url: string): string {
 function extractImage(item: any): string {
   // Try different possible image sources
   const possibleImages = [
-    item.pagemap?.metatags?.[0]?.['og:image'], // Open Graph image
+    item.pagemap?.metatags?.[0]?.['twitter:image'], // Open Graph image
     item.pagemap?.cse_image?.[0]?.src,         // Custom search engine image
     item.pagemap?.imageobject?.[0]?.url        // Image object URL
   ];
   
   // // Return the first valid image URL
   const profileImage = possibleImages.find(img => img && img.startsWith('http'));
+  console.log(profileImage)
   
   // // If no valid profile image is found, return an empty string
   return profileImage || '';
