@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import * as XLSX from 'xlsx';
 import { useQuery } from 'react-query';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -56,8 +57,11 @@ export default function Dashboard() {
     timeUntilReset,
     isLoading: isLoadingLimits 
   } = useSearchLimit();
-  const [showUpgradeModal, setShowUpgradeModal] = useState(false);
-  const [hasSearched, setHasSearched] = useState(false);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
+  const [showExportModal, setShowExportModal] = useState<boolean>(false);
+  const [showUpgradeModal, setShowUpgradeModal] = useState<boolean>(false);
+  const [hasSearched, setHasSearched] = useState<boolean>(false);
   const [filters, setFilters] = useState<SearchFiltersState>({
     jobTitle: '',
     location: '',
@@ -92,6 +96,23 @@ export default function Dashboard() {
       keepPreviousData: true
     }
   );
+
+  const ADMIN_EMAIL = 'admin@webxela.com';
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const { data: {user}, error } = await supabase.auth.getUser();
+      if (error) {
+        console.error('Error fetching user:', error);
+        return;
+      }
+      setUserEmail(user?.email || null);
+      setIsAdmin(user?.email === ADMIN_EMAIL);
+    };
+
+    fetchUser();
+  }, []);
+
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
@@ -134,7 +155,42 @@ export default function Dashboard() {
   };
 
   const handleExport = async () => {
-    setShowUpgradeModal(true);
+    if (isAdmin) {
+      setShowExportModal(true);
+    } else {
+      alert('You need to be an admin to export data.');
+    }
+  };
+
+  const downloadExcel = () => {
+    setIsExporting(true);
+
+    try {
+      // Prepare the data for the Excel file
+      const data = displayedProfiles.map((profile) => ({
+        Name: profile.fullName,
+        Position: profile.currentPosition,
+        Company: profile.company,
+        // Location: profile.location,
+        About: profile.about,
+        ProfileLink: profile.link,
+      }));
+
+      // Create a worksheet and workbook
+      const worksheet = XLSX.utils.json_to_sheet(data);
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, 'Profiles');
+
+      // Generate the Excel file and trigger the download
+      XLSX.writeFile(workbook, 'LEXP_Profiles.xlsx');
+      alert('Excel file downloaded successfully!');
+    } catch (error) {
+      console.error('Error downloading Excel file:', error);
+      alert('Failed to download the Excel file. Please try again.');
+    } finally {
+      setIsExporting(false);
+      setShowExportModal(false); // Close the modal
+    }
   };
 
   const displayedProfiles = searchResponse?.items?.slice(0, INITIAL_VISIBLE_PROFILES) || [];
@@ -277,13 +333,68 @@ export default function Dashboard() {
                 whileHover={{ scale: 1.02, y: -1 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={handleExport}
-                disabled={isExporting}
+                disabled={!isAdmin || isExporting}
                 className="flex items-center space-x-2 px-4 sm:px-6 py-2.5 sm:py-3 bg-green-600 text-white text-sm sm:text-base rounded-xl hover:bg-green-700 transition-all duration-200 shadow-lg hover:shadow-green-500/20 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
               >
                 <span>
                   {isExporting ? 'Fetching data...' : 'Export to Excel'}
                 </span>
               </motion.button>
+
+              {/* Export Modal */}
+              <AnimatePresence>
+                {showExportModal && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+                    onClick={() => setShowExportModal(false)}
+                  >
+                    <motion.div
+                      initial={{ scale: 0.95, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      exit={{ scale: 0.95, opacity: 0 }}
+                      onClick={e => e.stopPropagation()}
+                      className="relative max-w-lg w-full bg-white rounded-2xl shadow-2xl overflow-hidden"
+                    >
+                      {/* Close Button */}
+                      <button
+                        onClick={() => setShowExportModal(false)}
+                        className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 transition-colors"
+                      >
+                        <X className="w-5 h-5 text-gray-500" />
+                      </button>
+
+                      {/* Modal Content */}
+                      <div className="p-8 sm:p-8">
+                        <h3 className="text-lg sm:text-xl font-medium text-gray-900 mb-2">Export Profiles</h3>
+                        <p className="text-sm sm:text-base text-gray-600 mb-4">
+                          Click the button below to download the profiles as an Excel file.
+                        </p>
+                        <div className='flex flex-col sm:flex-row gap-4 justify-center'>
+                          <motion.button
+                            whileHover={{ scale: 1.02, y: -2}}
+                            whileTap={{ scale: 0.98 }}
+                            onClick={downloadExcel}
+                            className='px-6 sm:px-8 py-3 rounded-xl text-white font-medium shadow-lg hover:shadow-green-500/20 transition-all duration-200 gradient-bg'
+                          >
+                            Download
+                          </motion.button>
+                          <motion.button
+                            whileHover={{ scale: 1.02, y: -2 }}
+                            whileTap={{ scale: 0.98 }}
+                            onClick={() => setShowExportModal(false)}
+                            className='px-6 sm:px-8 py-3 rounded-xl text-gray-700 font-medium border border-gray-200 hover:bg-gray-50 transition-all duration-200'
+                          >
+                            Cancel
+                          </motion.button>
+                        </div>
+                      </div>
+                    </motion.div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             <ProfileList
