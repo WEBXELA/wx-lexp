@@ -81,7 +81,7 @@ export default function ProfileList({ profiles, platform }: Props) {
                     )}
 
                     {profile.company && (
-                      <p className='text-gray-600'>{profile.company}</p>
+                      <p className='text-gray-600'>{profile.company?.replace(' | LinkedIn', '')}</p>
                     )}
 
                   </div>
@@ -156,8 +156,18 @@ export default function ProfileList({ profiles, platform }: Props) {
                     >
                       {profile.about && (
                         <div className="mb-4 space-y-1">
-                          <h4 className="text-base font-semibold text-gray-700">About: <span className='font-medium text-sm'>{profile.about}</span></h4>
-                          <h4 className='text-base font-semibold text-gray-700'>Experience: <span className='font-medium text-sm'>{profile.currentPosition} {profile.company}</span></h4>
+                          <h4 className="text-base font-semibold text-gray-700">
+                            About: <div className="font-medium text-sm">
+                              {profile.about.split('·').map((part, i) => {
+                                const decoded = part
+                                  .replace(/&amp;/g, '&')
+                                  .replace(/&#39;/g, "'");
+                                const trimmed = decoded.trim();
+                                return trimmed && <div key={i}>{trimmed}</div>;
+                              })}
+                            </div>
+                          </h4>
+                          <h4 className='text-base font-semibold text-gray-700'>Experience: <span className='font-medium text-sm'>{profile.currentPosition} {profile.company?.replace(' | LinkedIn', '')}</span></h4>
                         </div>
                       )}
 
