@@ -161,11 +161,12 @@ export default function ProfileList({ profiles, platform }: Props) {
                               {profile.about.split('·').map((part, i) => {
                                 const decoded = part
                                   .replace(/&amp;/g, '&')
-                                  .replace(/&#39;/g, "'");                                const trimmed = decoded.trim();
+                                  .replace(/&#39;/g, "'");
+                                const trimmed = decoded.trim();
                                 return trimmed && <div key={i}>{trimmed}</div>;
                               })}
                             </div>
-                          </h4>                          
+                          </h4>
                           <h4 className='text-base font-semibold text-gray-700'>Experience: <span className='font-medium text-sm'>{profile.currentPosition} {profile.company}</span></h4>
                         </div>
                       )}
