@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import * as XLSX from 'xlsx';
 import { useQuery } from 'react-query';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -14,7 +15,8 @@ import {
   Menu,
   Check,
   X,
-  AlertCircle
+  AlertCircle,
+  Clock
 } from 'lucide-react';
 import SearchFilters from '../components/SearchFilters';
 import ProfileList from '../components/ProfileList';
@@ -28,17 +30,17 @@ import { supabase } from '../lib/supabase';
 import { useSearchLimit } from '../hooks/useSearchLimit';
 
 const platformIcons = {
-  linkedin: Linkedin,
-  instagram: Instagram,
-  facebook: Facebook,
-  twitter: Twitter,
+  // linkedin: Linkedin,
+  // instagram: Instagram,
+  // facebook: Facebook,
+  // twitter: Twitter,
 };
 
 const platformNames = {
-  linkedin: 'LinkedIn',
-  instagram: 'Instagram',
-  facebook: 'Facebook',
-  twitter: 'Twitter',
+  // linkedin: 'LinkedIn',
+  // instagram: 'Instagram',
+  // facebook: 'Facebook',
+  // twitter: 'Twitter',
 };
 
 const INITIAL_VISIBLE_PROFILES = 5;
@@ -47,9 +49,19 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const [isExporting, setIsExporting] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { incrementSearchCount } = useSearchLimit();
-  const [showUpgradeModal, setShowUpgradeModal] = useState(false);
-  const [hasSearched, setHasSearched] = useState(false);
+  const { 
+    remainingSearches, 
+    incrementSearchCount, 
+    hasSubscription,
+    lastReset,
+    timeUntilReset,
+    isLoading: isLoadingLimits 
+  } = useSearchLimit();
+  const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
+  const [showExportModal, setShowExportModal] = useState<boolean>(false);
+  const [showUpgradeModal, setShowUpgradeModal] = useState<boolean>(false);
+  const [hasSearched, setHasSearched] = useState<boolean>(false);
   const [filters, setFilters] = useState<SearchFiltersState>({
     jobTitle: '',
     location: '',
@@ -85,6 +97,23 @@ export default function Dashboard() {
     }
   );
 
+  const ADMIN_EMAIL = 'admin@webxela.com';
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const { data: {user}, error } = await supabase.auth.getUser();
+      if (error) {
+        console.error('Error fetching user:', error);
+        return;
+      }
+      setUserEmail(user?.email || null);
+      setIsAdmin(user?.email === ADMIN_EMAIL);
+    };
+
+    fetchUser();
+  }, []);
+
+
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     navigate('/login');
@@ -99,8 +128,23 @@ export default function Dashboard() {
       alert('Please enter at least one search criteria (Job Title, Company, or Skills)');
       return;
     }
+
+    if (remainingSearches === 0 && !hasSubscription) {
+      const message = timeUntilReset
+        ? `Your search limit has been reached. You can search again in ${timeUntilReset}.`
+        : 'Your search limit has been reached. You can search again after 24 hours.';
+        
+      setShowUpgradeModal(true);
+      alert(message + '\nFor unlimited searches, upgrade to our membership.');
+      return;
+    }
     
-    await incrementSearchCount();
+    const canSearch = await incrementSearchCount();
+    if (!canSearch) {
+      setShowUpgradeModal(true);
+      return;
+    }
+
     setFilters(prev => ({ ...prev, page: 1 }));
     setHasSearched(true);
     refetch();
@@ -111,19 +155,55 @@ export default function Dashboard() {
   };
 
   const handleExport = async () => {
-    setShowUpgradeModal(true);
+    if (isAdmin) {
+      setShowExportModal(true);
+    } else {
+      alert('You need to be an admin to export data.');
+    }
+  };
+
+  const downloadExcel = () => {
+    setIsExporting(true);
+
+    try {
+      // Prepare the data for the Excel file
+      const data = displayedProfiles.map((profile) => ({
+        Name: profile.fullName,
+        Position: profile.currentPosition,
+        Company: profile.company,
+        // Location: profile.location,
+        About: profile.about,
+        ProfileLink: profile.link,
+      }));
+
+      // Create a worksheet and workbook
+      const worksheet = XLSX.utils.json_to_sheet(data);
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, 'Profiles');
+
+      // Generate the Excel file and trigger the download
+      XLSX.writeFile(workbook, 'LEXP_Profiles.xlsx');
+      alert('Excel file downloaded successfully!');
+    } catch (error) {
+      console.error('Error downloading Excel file:', error);
+      alert('Failed to download the Excel file. Please try again.');
+    } finally {
+      setIsExporting(false);
+      setShowExportModal(false); // Close the modal
+    }
   };
 
   const displayedProfiles = searchResponse?.items?.slice(0, INITIAL_VISIBLE_PROFILES) || [];
   const hasMoreProfiles = searchResponse?.items && searchResponse.items.length > INITIAL_VISIBLE_PROFILES;
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="glass-effect fixed w-full z-50 border-b border-gray-200/80">
+    <div className="min-h-screen bg-gray-50 font-inter">
+      {/* Header */}
+      {/* <header className="glass-effect fixed w-full z-50 border-b border-gray-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-4">
-              <Search className="w-8 h-8 text-blue-600" />
+              <Search className="w-8 h-8 text-purple-600" />
               <h1 className="text-xl font-bold text-gray-900">LEXP</h1>
             </div>
             <button
@@ -135,11 +215,78 @@ export default function Dashboard() {
             </button>
           </div>
         </div>
+      </header> */}
+      <header className="glass-effect fixed w-full z-50 border-b border-gray-200/80 bg-white dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-evenly gap-28 sm:justify-between h-16 sm:h-20">
+            {/* Logo Section */}
+            <div className="flex items-center space-x-2">
+              <Search className="w-6 h-6 sm:w-8 sm:h-8 text-primary-600" />
+              <h1 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white bg-gradient-to-r from-primary-500 to-secondary-600 bg-clip-text text-transparent">
+                LEXP
+              </h1>
+            </div>
+            {/* Hamburger Menu for Mobile */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="md:hidden p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition duration-300"
+            >
+              {isMobileMenuOpen ? (
+                <X className="w-6 h-6 text-gray-600 dark:text-gray-300" />
+              ) : (
+                <Menu className="w-6 h-6 text-gray-600 dark:text-gray-300" />
+              )}
+            </button>
+
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-6">
+              <button
+                onClick={handleSignOut}
+                className="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition"
+              >
+                <LogOut className="w-4 h-4" />
+                <span>Sign Out</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+            <div className="flex flex-col space-y-4 p-4">
+              <button
+                onClick={handleSignOut}
+                className="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition"
+              >
+                <LogOut className="w-4 h-4" />
+                <span>Sign Out</span>
+              </button>
+            </div>
+          </div>
+        )}
       </header>
 
+      {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-8">
+        {/* Search Filters */}
         <div className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Find Profiles</h2>
+          <div className="flex flex-col sm:flex-row md:flex-row justify-between items-center mb-4">
+            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900">Find Profiles</h2>
+            {!hasSubscription && (
+              <div className="flex items-center space-x-2 text-sm">
+                <Clock className="w-4 h-4 text-gray-500" />
+                <span className="text-gray-600">
+                  {remainingSearches} of 10 searches remaining
+                  {timeUntilReset && remainingSearches === 0 && (
+                    <span className="text-gray-400">
+                      {' '}(Resets in {timeUntilReset})
+                    </span>
+                  )}
+                </span>
+              </div>
+            )}
+          </div>
           <div className="flex flex-wrap gap-4 mb-6">
             {Object.entries(platformNames).map(([key, name]) => {
               const Icon = platformIcons[key as keyof typeof platformIcons];
@@ -149,7 +296,7 @@ export default function Dashboard() {
                   onClick={() => handleFilterChange('platform', key)}
                   className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all ${
                     filters.platform === key
-                      ? 'bg-blue-600 text-white shadow-lg'
+                      ? 'bg-primary-600 text-white shadow-lg'
                       : 'bg-white text-gray-700 hover:bg-gray-50'
                   }`}
                 >
@@ -170,7 +317,7 @@ export default function Dashboard() {
         {/* Loading State */}
         {isLoading && (
           <div className="flex flex-col items-center justify-center py-12">
-            <div className="w-12 h-12 border-t-2 border-b-2 border-blue-600 rounded-full animate-spin mb-4" />
+            <div className="w-12 h-12 border-t-2 border-b-2 border-primary-600 rounded-full animate-spin mb-4" />
             <p className="text-gray-600">Searching for profiles...</p>
           </div>
         )}
@@ -178,21 +325,77 @@ export default function Dashboard() {
         {/* Search Results */}
         {searchResponse?.items && searchResponse.items.length > 0 && (
           <>
-            <div className="flex justify-between items-center mt-6 sm:mt-8">
-              <p className="text-gray-600">
+            <div className="flex flex-col sm:flex-row justify-between items-center mt-6 sm:mt-8 gap-4">
+              <p className="text-sm sm:text-base text-gray-600">
                 Found {searchResponse.totalResults} profiles
               </p>
               <motion.button
                 whileHover={{ scale: 1.02, y: -1 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={handleExport}
-                disabled={isExporting}
+                disabled={!isAdmin || isExporting}
                 className="flex items-center space-x-2 px-4 sm:px-6 py-2.5 sm:py-3 bg-green-600 text-white text-sm sm:text-base rounded-xl hover:bg-green-700 transition-all duration-200 shadow-lg hover:shadow-green-500/20 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
               >
                 <span>
                   {isExporting ? 'Fetching data...' : 'Export to Excel'}
                 </span>
               </motion.button>
+
+              {/* Export Modal */}
+              <AnimatePresence>
+                {showExportModal && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+                    onClick={() => setShowExportModal(false)}
+                  >
+                    <motion.div
+                      initial={{ scale: 0.95, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      exit={{ scale: 0.95, opacity: 0 }}
+                      onClick={e => e.stopPropagation()}
+                      className="relative max-w-lg w-full bg-white rounded-2xl shadow-2xl overflow-hidden"
+                    >
+                      {/* Close Button */}
+                      <button
+                        onClick={() => setShowExportModal(false)}
+                        className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 transition-colors"
+                        title="Close export modal"
+                      >
+                        <X className="w-5 h-5 text-gray-500" />
+                      </button>
+
+                      {/* Modal Content */}
+                      <div className="p-8 sm:p-8">
+                        <h3 className="text-lg sm:text-xl font-medium text-gray-900 mb-2">Export Profiles</h3>
+                        <p className="text-sm sm:text-base text-gray-600 mb-4">
+                          Click the button below to download the profiles as an Excel file.
+                        </p>
+                        <div className='flex flex-col sm:flex-row gap-4 justify-center'>
+                          <motion.button
+                            whileHover={{ scale: 1.02, y: -2}}
+                            whileTap={{ scale: 0.98 }}
+                            onClick={downloadExcel}
+                            className='px-6 sm:px-8 py-3 rounded-xl text-white font-medium shadow-lg hover:shadow-green-500/20 transition-all duration-200 gradient-bg'
+                          >
+                            Download
+                          </motion.button>
+                          <motion.button
+                            whileHover={{ scale: 1.02, y: -2 }}
+                            whileTap={{ scale: 0.98 }}
+                            onClick={() => setShowExportModal(false)}
+                            className='px-6 sm:px-8 py-3 rounded-xl text-gray-700 font-medium border border-gray-200 hover:bg-gray-50 transition-all duration-200'
+                          >
+                            Cancel
+                          </motion.button>
+                        </div>
+                      </div>
+                    </motion.div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             <ProfileList
@@ -207,7 +410,7 @@ export default function Dashboard() {
                   whileHover={{ scale: 1.02, y: -2 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={handleShowMore}
-                  className="flex items-center space-x-2 px-6 py-3 bg-white text-blue-600 border border-blue-200 rounded-xl hover:bg-blue-50 transition-all duration-200 shadow-sm hover:shadow-md font-medium"
+                  className="flex items-center space-x-2 px-6 py-3 bg-white text-primary-600 border border-primary-200 rounded-xl hover:bg-primary-50 transition-all duration-200 shadow-sm hover:shadow-md font-medium"
                 >
                   <ChevronDown className="w-5 h-5" />
                   <span>Show More Profiles</span>
@@ -222,13 +425,13 @@ export default function Dashboard() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center py-12"
+            className="text-center py-12 px-4 sm:px-6"
           >
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 mb-4">
               <AlertCircle className="w-8 h-8 text-gray-400" />
             </div>
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No profiles found</h3>
-            <p className="text-gray-600 max-w-md mx-auto">
+            <h3 className="text-lg sm:text-xl font-medium text-gray-900 mb-2">No profiles found</h3>
+            <p className="text-sm sm:text-base text-gray-600 max-w-md mx-auto">
               Try adjusting your search criteria or using different keywords to find more results.
             </p>
           </motion.div>
@@ -239,13 +442,13 @@ export default function Dashboard() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center py-12"
+            className="text-center py-12 px-4 sm:px-6"
           >
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-100 mb-4">
-              <Search className="w-8 h-8 text-blue-600" />
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary-100 mb-4">
+              <Search className="w-8 h-8 text-primary-600" />
             </div>
-            <h3 className="text-lg font-medium text-gray-900 mb-2">Start your search</h3>
-            <p className="text-gray-600 max-w-md mx-auto">
+            <h3 className="text-lg sm:text-xl font-medium text-gray-900 mb-2">Start your search</h3>
+            <p className="text-sm sm:text-base text-gray-600 max-w-md mx-auto">
               Enter your search criteria above to find relevant profiles across different platforms.
             </p>
           </motion.div>
@@ -266,33 +469,34 @@ export default function Dashboard() {
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.95, opacity: 0 }}
                 onClick={e => e.stopPropagation()}
-                className="relative max-w-2xl w-full bg-white rounded-2xl shadow-2xl overflow-hidden"
+                className="relative max-w-lg w-full bg-gradient-to-br from-primary-50 to-white rounded-2xl shadow-2xl overflow-hidden border border-primary-100"
               >
                 {/* Close Button */}
                 <button
                   onClick={() => setShowUpgradeModal(false)}
-                  className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 transition-colors"
+                  className="absolute top-4 right-4 p-2 rounded-full hover:bg-primary-100 transition-colors"
+                  title="Close modal"
                 >
-                  <X className="w-5 h-5 text-gray-500" />
+                  <X className="w-5 h-5 text-primary-600" />
                 </button>
 
                 {/* Modal Content */}
-                <div className="p-8">
+                <div className="p-8 sm:p-8">
                   {/* Header */}
-                  <div className="text-center mb-8">
-                    <div className="w-16 h-16 rounded-full gradient-bg flex items-center justify-center mx-auto mb-6">
-                      <Lock className="w-8 h-8 text-white" />
+                  <div className="text-center mb-6 sm:mb-8">
+                    <div className="w-16 h-16 sm:w-16 sm:h-16 rounded-full bg-primary-600 flex items-center justify-center mx-auto mb-4 sm:mb-6">
+                      <Lock className="w-8 h-8 sm:w-8 sm:h-8 text-white" />
                     </div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                    <h3 className="text-xl sm:text-2xl font-bold text-primary-600 mb-2 sm:mb-3">
                       Unlock Premium Features
                     </h3>
-                    <p className="text-gray-600 max-w-md mx-auto">
+                    <p className="text-sm sm:text-base text-primary-600/80 max-w-md mx-auto">
                       Upgrade to our premium plan to access unlimited exports, advanced filters, and exclusive features.
                     </p>
                   </div>
 
                   {/* Features Grid */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 sm:mb-8">
                     {[
                       'Unlimited exports',
                       'Advanced search filters',
@@ -308,20 +512,20 @@ export default function Dashboard() {
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.1 }}
-                        className="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-50 transition-colors"
+                        className="flex items-center space-x-3 p-3 rounded-lg bg-white hover:bg-primary-50 transition-colors border border-primary-100"
                       >
-                        <div className="w-6 h-6 rounded-full gradient-bg flex items-center justify-center flex-shrink-0">
+                        <div className="w-6 h-6 rounded-full bg-primary-600 flex items-center justify-center flex-shrink-0">
                           <Check className="w-4 h-4 text-white" />
                         </div>
-                        <span className="text-gray-700">{feature}</span>
+                        <span className="text-sm sm:text-base text-primary-600">{feature}</span>
                       </motion.div>
                     ))}
                   </div>
 
                   {/* Pricing */}
-                  <div className="text-center mb-8">
-                    <p className="text-sm text-gray-500 mb-2">Contact us for pricing</p>
-                    <p className="text-gray-600">Get a customized plan that fits your needs</p>
+                  <div className="text-center mb-6 sm:mb-8">
+                    <p className="text-xs sm:text-sm text-primary-600/80 mb-1 sm:mb-2">Contact us for pricing</p>
+                    <p className="text-sm sm:text-base text-primary-600">Get a customized plan that fits your needs</p>
                   </div>
 
                   {/* CTA Buttons */}
@@ -331,9 +535,11 @@ export default function Dashboard() {
                       whileTap={{ scale: 0.98 }}
                       onClick={() => {
                         setShowUpgradeModal(false);
+                        window.scrollTo(0, 0);
                         navigate('/contact');
                       }}
-                      className="px-8 py-3 rounded-xl text-white font-medium shadow-lg hover:shadow-blue-500/20 transition-all duration-200 gradient-bg"
+                      className="px-6 sm:px-8 py-3 rounded-xl text-white font-medium shadow-lg hover:shadow-primary-500/20 transition-all duration-200 bg-primary-600 hover:bg-primary-700 border border-primary-500"
+                      title="Contact sales team"
                     >
                       Contact Sales
                     </motion.button>
@@ -341,7 +547,8 @@ export default function Dashboard() {
                       whileHover={{ scale: 1.02, y: -2 }}
                       whileTap={{ scale: 0.98 }}
                       onClick={() => setShowUpgradeModal(false)}
-                      className="px-8 py-3 rounded-xl text-gray-700 font-medium border border-gray-200 hover:bg-gray-50 transition-all duration-200"
+                      className="px-6 sm:px-8 py-3 rounded-xl text-primary-600 font-medium border-2 border-primary-200 hover:bg-primary-50 transition-all duration-200"
+                      title="Close modal"
                     >
                       Maybe Later
                     </motion.button>

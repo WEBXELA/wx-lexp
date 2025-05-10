@@ -44,7 +44,7 @@ export default function Login() {
   };
 
   return (
-    <AuthLayout title="Sign in to your account">
+    <AuthLayout title="Sign in to your account" className="font-inter">
       <form className="space-y-6" onSubmit={handleLogin}>
         {error && (
           <motion.div
@@ -70,7 +70,7 @@ export default function Login() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
               placeholder="you@example.com"
             />
           </div>
@@ -89,7 +89,7 @@ export default function Login() {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
               placeholder="••••••••"
             />
           </div>
@@ -101,7 +101,7 @@ export default function Login() {
             whileTap={{ scale: 0.98 }}
             type="submit"
             disabled={isLoading}
-            className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
           >
             {isLoading ? (
               <div className="flex items-center space-x-2">
@@ -114,14 +114,14 @@ export default function Login() {
           </motion.button>
         </div>
 
-        {/* <div className="text-sm text-center">
+        <div className="text-sm text-center">
           <Link 
             to="/signup" 
-            className="font-medium text-blue-600 hover:text-blue-500 transition-colors duration-200"
+            className="font-medium text-primary-600 hover:text-primary-500 transition-colors duration-200"
           >
             Don't have an account? Sign up
           </Link>
-        </div> */}
+        </div>
       </form>
     </AuthLayout>
   );

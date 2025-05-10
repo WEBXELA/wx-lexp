@@ -3,22 +3,49 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      // keyframes: {
+      //   "accordion-down": {
+      //     from: { height: "0" },
+      //     to: { height: "var(--radix-accordion-content-height)" },
+      //   },
+      //   "accordion-up": {
+      //     from: { height: "var(--radix-accordion-content-height)" },
+      //     to: { height: "0" },
+      //   },
+      // },
+      // animation: {
+      //   "accordion-down": "accordion-down 0.2s ease-out",
+      //   "accordion-up": "accordion-up 0.2s ease-out",
+      // },
       fontFamily: {
-        sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
         heading: ['Montserrat', 'system-ui', 'sans-serif'],
+        'inter': ['Inter', 'sans-serif'],
       },
       colors: {
-        navy: {
-          50: '#f5f7fa',
-          100: '#eaeef4',
-          200: '#d1dbe7',
-          300: '#a9bcd3',
-          400: '#7b97bc',
-          500: '#5777a4',
-          600: '#435f89',
-          700: '#374d6f',
-          800: '#2f405c',
-          900: '#1a2435',
+        primary: {
+          50: '#f0f7ff',
+          100: '#e0f0ff',
+          200: '#bae0ff',
+          300: '#7cc5ff',
+          400: '#36a6ff',
+          500: '#0080ff',
+          600: '#0066ff',
+          700: '#0052cc',
+          800: '#004299',
+          900: '#002e66',
+        },
+        secondary: {
+          50: '#f5f7ff',
+          100: '#ebf0ff',
+          200: '#d6e0ff',
+          300: '#b3c5ff',
+          400: '#809fff',
+          500: '#4d7aff',
+          600: '#1a55ff',
+          700: '#0033cc',
+          800: '#002699',
+          900: '#001a66',
         },
         gold: {
           50: '#fdfbed',

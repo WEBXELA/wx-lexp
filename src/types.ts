@@ -33,6 +33,9 @@ export interface Profile {
   connectionDegree: string;
   about: string;
   profileImageUrl: string;
+  certification: string[]; // Add certifications
+  skills: string[]; // Add skills
+  phoneNumber: string; // Add phone number
 }
 
 export interface SearchResponse {
@@ -41,3 +44,4 @@ export interface SearchResponse {
   currentPage: number;
   totalPages: number;
 }
+

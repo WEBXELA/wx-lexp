@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { ExternalLink, MapPin, Building, GraduationCap, Users, ChevronDown, ChevronUp, Lock, Check, X } from 'lucide-react';
+import { useState } from 'react';
+import { ChevronDown, ChevronUp, Lock, Check, X } from 'lucide-react';
+import { FaLinkedin, FaInstagram, FaFacebook, FaXTwitter } from 'react-icons/fa6';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Profile } from '../types';
 import { useNavigate } from 'react-router-dom';
@@ -21,13 +22,13 @@ export default function ProfileList({ profiles, platform }: Props) {
   const getPlatformText = (platform: string) => {
     switch (platform) {
       case 'linkedin':
-        return 'LinkedIn';
+        return <FaLinkedin className='w-6 h-6' />;
       case 'instagram':
-        return 'Instagram';
+        return <FaInstagram className='w-6 h-6' />;
       case 'facebook':
-        return 'Facebook';
+        return <FaFacebook className='w-6 h-6' />;
       case 'twitter':
-        return 'Twitter';
+        return <FaXTwitter className='w-6 h-6' />;
       default:
         return 'Profile';
     }
@@ -47,7 +48,7 @@ export default function ProfileList({ profiles, platform }: Props) {
 
   return (
     <>
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         className="mt-8 space-y-4"
@@ -61,45 +62,64 @@ export default function ProfileList({ profiles, platform }: Props) {
             className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
           >
             <div className="flex items-start space-x-4">
-              {shouldShowImage(platform) && profile.profileImageUrl && (
-                <img 
-                  src={profile.profileImageUrl} 
+              {shouldShowImage(platform) && (
+                <img
+                  src={profile.profileImageUrl}
                   alt={profile.fullName}
                   className="w-16 h-16 rounded-full object-cover"
                 />
               )}
               <div className="flex-1">
                 <div className="flex items-start justify-between">
-                  <div>
-                    <h3 className="text-xl font-semibold text-gray-900">
-                      {profile.fullName || profile.title}
-                    </h3>
+                  <div className='space-y-2'>
+                    <h2 className="text-xl font-semibold text-gray-900">
+                      {profile.fullName}
+                    </h2>
+
                     {profile.currentPosition && (
-                      <p className="text-gray-600">{profile.currentPosition}</p>
+                      <p className="text-gray-600 flex">{profile.currentPosition}</p>
                     )}
+
+                    {profile.company && (
+                      <p className='text-gray-600'>{profile.company?.replace(' | LinkedIn', '')}</p>
+                    )}
+
                   </div>
-                  <div className="flex items-center space-x-2">
-                    <button
-                      onClick={() => toggleProfile(profile.link)}
-                      className="text-gray-500 hover:text-gray-700 transition-colors"
-                    >
-                      {expandedProfile === profile.link ? (
-                        <ChevronUp className="w-5 h-5" />
-                      ) : (
-                        <ChevronDown className="w-5 h-5" />
-                      )}
-                    </button>
-                    <button
-                      onClick={() => handleOpenProfile(profile.link)}
-                      className="flex items-center space-x-1 text-blue-600 hover:text-blue-800 px-3 py-1.5 rounded-md hover:bg-blue-50 transition-colors"
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                      <span className="text-sm">View on {getPlatformText(platform)}</span>
-                    </button>
+                  <div className='flex flex-col gap-3 justify-center items-center'>
+                    <div className='flex flex-col items-end space-y-2'>
+                      <button
+                        onClick={() => toggleProfile(profile.link)}
+                        className="text-gray-500 hover:text-gray-700 transition-colors"
+                      >
+                        {expandedProfile === profile.link ? (
+                          <ChevronUp className="w-6 h-6" />
+                        ) : (
+                          <ChevronDown className="w-6 h-6" />
+                        )}
+                      </button>
+                    </div>
+                    <a href={`${profile.link}`} target='_blank'>
+                      <FaLinkedin className='text-[#0077b5] w-6 h-6' />
+                    </a>
+
+                    {/* <div className='flex flex-col items-end justify-start space-y-2'>
+                      {profile.currentPosition && (
+                        <p className="text-gray-600 flex"><Briefcase className='w-5 h-5 mr-2' />{profile.currentPosition || profile.company}</p>
+                      )}    
+                      <button
+                        onClick={() => handleOpenProfile(profile.link)}
+                        className="flex space-x-2 text-blue-600 hover:text-blue-600 py-1.5 rounded-md hover:bg-blue-50 transition-colors"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                        <span className="text-sm">{getPlatformText(platform)}</span>
+                        <span className='hidden'>{getPlatformText(platform)}</span>
+                        
+                      </button>                  
+                    </div> */}
                   </div>
                 </div>
-                
-                <div className="mt-4 space-y-2">
+
+                {/* <div className="mt-4 space-y-2">
                   {profile.company && (
                     <div className="flex items-center space-x-2 text-gray-600">
                       <Building className="w-4 h-4" />
@@ -124,7 +144,7 @@ export default function ProfileList({ profiles, platform }: Props) {
                       <span>{profile.followers.toLocaleString()} followers</span>
                     </div>
                   )}
-                </div>
+                </div> */}
 
                 <AnimatePresence>
                   {expandedProfile === profile.link && (
@@ -135,9 +155,19 @@ export default function ProfileList({ profiles, platform }: Props) {
                       className="mt-4 pt-4 border-t border-gray-200"
                     >
                       {profile.about && (
-                        <div className="mb-4">
-                          <h4 className="text-sm font-semibold text-gray-700 mb-2">About</h4>
-                          <p className="text-gray-600">{profile.about}</p>
+                        <div className="mb-4 space-y-1">
+                          <h4 className="text-base font-semibold text-gray-700">
+                            About: <div className="font-medium text-sm">
+                              {profile.about.split('·').map((part, i) => {
+                                const decoded = part
+                                  .replace(/&amp;/g, '&')
+                                  .replace(/&#39;/g, "'");
+                                const trimmed = decoded.trim();
+                                return trimmed && <div key={i}>{trimmed}</div>;
+                              })}
+                            </div>
+                          </h4>
+                          <h4 className='text-base font-semibold text-gray-700'>Experience: <span className='font-medium text-sm'>{profile.currentPosition} {profile.company?.replace(' | LinkedIn', '')}</span></h4>
                         </div>
                       )}
 
@@ -229,7 +259,7 @@ export default function ProfileList({ profiles, platform }: Props) {
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.1 }}
-                      className="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-50 transition-colors"
+                      className="flex items-center space-x-3 p-3 rounded-lg hover:bg-primary-50 transition-colors"
                     >
                       <div className="w-6 h-6 rounded-full gradient-bg flex items-center justify-center flex-shrink-0">
                         <Check className="w-4 h-4 text-white" />

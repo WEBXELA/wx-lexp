@@ -20,24 +20,26 @@ function extractProfileUrl(url: string): string {
 }
 
 function extractImage(item: any): string {
-  // Try different possible image sources
   const possibleImages = [
-    item.pagemap?.metatags?.[0]?.['og:image'],
-    item.pagemap?.cse_image?.[0]?.src,
-    item.pagemap?.imageobject?.[0]?.url,
-    // Fallback to a default avatar if no image is found
-    'https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&w=256&h=256&q=80'
+    item.pagemap?.metatags?.[0]?.['twitter:image'], // Open Graph image
+    item.pagemap?.cse_image?.[0]?.src,         // Custom search engine image
+    item.pagemap?.imageobject?.[0]?.url        // Image object URL
   ];
   
-  // Return the first valid image URL
-  return possibleImages.find(img => img && img.startsWith('http')) || '';
+  // // Return the first valid image URL
+  const profileImage = possibleImages.find(img => img && img.startsWith('http'));  
+  
+  // // If no valid profile image is found, return an empty string
+  return profileImage || '';
 }
 
 function extractTitle(title: string): { fullName: string; position: string; company: string } {
   const parts = title.split(' - ').map(part => part.trim());
+  const position = parts[1] || '';
+  const currentPosition = position.replace('| LinkedIn', '').trim();
   return {
     fullName: parts[0] || '',
-    position: parts[1] || '',
+    position: currentPosition,
     company: parts[2] || ''
   };
 }
@@ -45,7 +47,7 @@ function extractTitle(title: string): { fullName: string; position: string; comp
 export async function searchProfiles(filters: SearchFiltersState): Promise<SearchResponse> {
   try {
     const startIndex = (filters.page - 1) * RESULTS_PER_PAGE + 1;
-    const query = `site:linkedin.com/in/ ${filters.jobTitle} ${filters.location} ${filters.industry} ${filters.companySize} ${filters.company} ${filters.skills} ${filters.languages}`.trim();
+    const query = `site:linkedin.com/in/ ${filters.jobTitle || ''} ${filters.location || ''} ${filters.industry || ''} ${filters.companySize || ''} ${filters.company || ''} ${filters.skills || ''} ${filters.languages || ''}`.trim();
     
     const response = await axios.get('https://www.googleapis.com/customsearch/v1', {
       params: {
@@ -78,12 +80,15 @@ export async function searchProfiles(filters: SearchFiltersState): Promise<Searc
         fullName,
         currentPosition: position,
         company,
-        education: [],
-        location: '',
+        education: item.pagemap?.education || [], // Extract education details if available
+        location: item.pagemap?.metatags?.[0]?.['locale'] || 'Unknown Location', // Extract location if available
         followers: 0,
         connectionDegree: '',
-        about: item.snippet || '',
-        profileImageUrl: imageUrl
+        about: item.pagemap?.metatags?.[0]?.['og:description'] || 'No description available',
+        profileImageUrl: imageUrl,
+        certification: item.pagemap?.certifications || [], // Add certifications if available
+        skills: item.pagemap?.skills || [], // Add skills if available
+        phoneNumber: item.pagemap?.contact?.[0]?.phone || 'N/A' // Add phone number if available
       };
     });
 
