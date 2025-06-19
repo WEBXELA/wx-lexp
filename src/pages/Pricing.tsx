@@ -67,7 +67,7 @@ export default function Pricing() {
     if (plan === 'Free') {
       navigate('/signup');
     } else if (plan === 'Enterprise') {
-      window.location.href = 'mailto:sales@webxela.com';
+      window.location.href = 'mailto:lexp@webxela.com';
     } else {
       // TODO: Implement payment flow
       navigate('/signup');
@@ -75,9 +75,9 @@ export default function Pricing() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 font-inter">
+    <div className="min-h-screen bg-gray-50 font-inter">
       {/* Header */}
-      <div className="bg-white dark:bg-gray-900">
+      <div className="bg-white">
         <div className="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl font-extrabold text-primary-600 mb-1 sm:text-5xl sm:tracking-tight lg:text-6xl">
@@ -99,10 +99,10 @@ export default function Pricing() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className={`rounded-lg shadow-lg divide-y divide-gray-200 dark:divide-gray-700 bg-white dark:bg-gray-800 ${
+              className={`rounded-lg shadow-lg divide-y divide-gray-200 bg-white ${
                 plan.popular
                   ? 'border-2 border-primary-500 relative'
-                  : 'border border-gray-200 dark:border-gray-700'
+                  : 'border border-gray-200'
               }`}
             >
               {plan.popular && (
@@ -116,13 +116,13 @@ export default function Pricing() {
                 <h2 className="text-2xl font-semibold leading-6 text-gray-900">
                   {plan.name}
                 </h2>
-                <p className="mt-4 text-sm text-gray-500 dark:text-gray-300">{plan.description}</p>
+                <p className="mt-4 text-sm text-gray-500">{plan.description}</p>
                 <p className="mt-8">
-                  <span className="text-4xl font-extrabold text-gray-900 dark:text-white">
+                  <span className="text-4xl font-extrabold text-gray-900">
                     {plan.price}
                   </span>
                   {plan.period && (
-                    <span className="text-base font-medium text-gray-500 dark:text-gray-300">
+                    <span className="text-base font-medium text-gray-500">
                       /month
                     </span>
                   )}
@@ -141,20 +141,20 @@ export default function Pricing() {
                 </motion.button>
               </div>
               <div className="px-6 pt-6 pb-8">
-                <h3 className="text-xs font-semibold text-gray-900 dark:text-white tracking-wide uppercase">
+                <h3 className="text-xs font-semibold text-gray-900 tracking-wide uppercase">
                   What's included
                 </h3>
                 <ul className="mt-6 space-y-4">
                   {plan.features.map((feature) => (
                     <li key={feature} className="flex space-x-3">
                       <Check className="h-5 w-5 text-green-500 flex-shrink-0" />
-                      <span className="text-sm text-gray-500 dark:text-gray-300">{feature}</span>
+                      <span className="text-sm text-gray-500">{feature}</span>
                     </li>
                   ))}
                   {plan.limitations?.map((limitation) => (
                     <li key={limitation} className="flex space-x-3">
                       <X className="h-5 w-5 text-red-500 flex-shrink-0" />
-                      <span className="text-sm text-gray-500 dark:text-gray-300">{limitation}</span>
+                      <span className="text-sm text-gray-500">{limitation}</span>
                     </li>
                   ))}
                 </ul>
@@ -165,7 +165,7 @@ export default function Pricing() {
       </div>
 
       {/* FAQ Section */}
-      <div className="bg-white dark:bg-gray-900">
+      <div className="bg-white">
         <div className="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-extrabold text-primary-600 text-center mb-12">
             Frequently asked questions
@@ -197,17 +197,17 @@ export default function Pricing() {
               <div key={faq.question} className='rounded-full'>
                 <Accordion 
                   key={faq.question} 
-                  className="mb-4 border border-primary-200 rounded-lg dark:rounded-none shadow-sm dark:border-gray-700"
+                  className="mb-4 border border-primary-200 rounded-lg shadow-sm"
                   sx={{
                     backgroundColor: 'primary.500',
                     '&:before': { display: 'none' },
                   }}
                 >
                   <AccordionSummary
-                    expandIcon={<ChevronDown className="h-8 w-8 text-primary-500 dark:text-gray-900" />}
+                    expandIcon={<ChevronDown className="h-8 w-8 text-primary-500" />}
                     aria-controls="panel1a-content"
                     id="panel1a-header"
-                    className='px-4 py-2 hover:bg-primary-50 dark:hover:bg-gray-700 rounded-lg dark:rounded-none'
+                    className='px-4 py-2 hover:bg-primary-50'
                     sx={{
                       '& .MuiAccordionSummary-content': {
                         margin: 0,
@@ -215,7 +215,7 @@ export default function Pricing() {
                     }}
                   >
                     <Typography 
-                      className='text-lg font-semibold text-gray-900 dark:text-black'
+                      className='text-lg font-semibold text-gray-900'
                       sx={{
                         fontSize: '1rem',
                         fontWeight: 600,
@@ -225,7 +225,7 @@ export default function Pricing() {
                     </Typography>
                   </AccordionSummary>
                   <AccordionDetails
-                    className='px-4 py-2 bg-primary-50 dark:bg-gray-800 rounded-lg dark:rounded-none'
+                    className='px-4 py-2 bg-primary-50'
                     sx={{
                       color: 'gray',
                       fontSize: '0.875rem',

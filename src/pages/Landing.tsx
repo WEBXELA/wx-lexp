@@ -84,9 +84,9 @@ export default function Landing() {
   }, []);
 
   return (
-    <div className="bg-gradient-to-b from-blue-50 via-primary-50 to-secondary-50 font-inter">
+    <div className="bg-white font-inter">
       {/* Hero Section */}
-      <section className="relative overflow-hidden pt-20 pb-32">
+      <section className="relative overflow-hidden pt-20 pb-32 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="lg:grid lg:grid-cols-1 lg:gap-8 items-center">
             <motion.div
@@ -97,19 +97,19 @@ export default function Landing() {
             >
               <motion.h1
                 variants={fadeInUp}
-                className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 dark:text-white tracking-tight flex flex-col justify-center items-center"
+                className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 tracking-tight flex flex-col justify-center items-center"
               >
-                <div className="text-primary-600 dark:text-primary-400 font-bold mb-4">
+                <div className="text-primary-700 font-bold mb-4">
                   Elevate
                 </div>
                 Your <br />
-                <span className="text-primary-600 dark:text-primary-400"> Lead Generation</span>
+                <span className="text-primary-700"> Lead Generation</span>
               </motion.h1>
               <motion.p
                 variants={fadeInUp}
-                className="mt-6 text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-300 leading-relaxed"
+                className="mt-6 text-base sm:text-lg lg:text-xl text-gray-700 leading-relaxed"
               >
-                Revolutionize your business with our {' '} <span className='text-primary-500 font-bold'>AI-powered</span> lead generation platform that's easy to use, delivers ROI, and transforms customer happiness into your competitive edge.
+                Revolutionize your business with our {' '} <span className='text-primary-700 font-bold'>AI-powered</span> lead generation platform that's easy to use, delivers ROI, and transforms customer happiness into your competitive edge.
               </motion.p>
               <motion.div
                 variants={fadeInUp}
@@ -122,13 +122,13 @@ export default function Landing() {
                     window.scrollTo(0, 0);
                     navigate('/signup');
                   }}
-                  className="px-8 py-3 bg-white text-primary-600 rounded-xl font-medium shadow-lg hover:shadow-primary-200/50 border border-primary-100 hover:border-primary-200 transition-all duration-200"
+                  className="px-8 py-3 bg-primary-600 text-white rounded-xl font-medium shadow-sm hover:bg-primary-700 border border-primary-600 hover:border-primary-700 transition-all duration-200"
                 >
                   Get Started
                 </motion.button>
                 <button
                   onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-medium rounded-xl text-gray-700 border-2 border-primary-200 bg-white hover:bg-primary-50 hover:border-primary-300 transition-all shadow-lg transform hover:-translate-y-1"
+                  className="inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-medium rounded-xl text-primary-700 border-2 border-primary-200 bg-white hover:bg-primary-50 hover:border-primary-300 transition-all shadow-sm"
                 >
                   Learn More
                 </button>
@@ -147,12 +147,12 @@ export default function Landing() {
                   <motion.div
                     key={stat.label}
                     whileHover={{ scale: 1.02 }}
-                    className="text-center p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-100 dark:border-gray-700"
+                    className="text-center p-6 bg-white rounded-lg shadow-sm border border-gray-200"
                   >
-                    <p className="text-2xl sm:text-3xl font-bold text-primary-600 dark:text-primary-400">
+                    <p className="text-2xl sm:text-3xl font-bold text-primary-700">
                       {stat.value}
                     </p>
-                    <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mt-2">
+                    <p className="text-sm sm:text-base text-gray-700 mt-2">
                       {stat.label}
                     </p>
                   </motion.div>
@@ -164,13 +164,13 @@ export default function Landing() {
       </section>
       
       {/* Features Section */}
-      <section id="features" className="py-32 bg-gradient-to-b from-primary-50 via-secondary-50 to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+      <section id="features" className="py-32 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold bg-gradient-to-r from-primary-500 to-secondary-600 bg-clip-text text-transparent mb-4">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
               Powerful Features for Modern Lead Generation
             </h2>
-            <p className="text-xl text-primary-600 max-w-2xl mx-auto">
+            <p className="text-xl text-primary-700 max-w-2xl mx-auto">
               Everything you need to find and connect with your ideal prospects
             </p>
           </div>
@@ -245,16 +245,16 @@ export default function Landing() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -10 }}
-                className="relative p-8 bg-gradient-to-br from-white to-gray-50 dark:bg-gray-800 dark:to-gray-900 rounded-2xl shadow-lg hover:shadow-xl transition-all border border-gray-100 dark:border-gray-700 group"
+                className="relative p-8 bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-lg hover:shadow-xl transition-all border border-gray-100 group"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-primary-50 to-transparent dark:from-primary-900 dark:to-gray-900 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute inset-0 bg-gradient-to-br from-primary-50 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
                 <div className="relative">
-                  <feature.icon className="h-12 w-12 text-primary-600 dark:text-primary-400 mb-6" />
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">{feature.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{feature.description}</p>
+                  <feature.icon className="h-12 w-12 text-primary-600 mb-6" />
+                  <h3 className="text-xl font-semibold text-gray-900 mb-4">{feature.title}</h3>
+                  <p className="text-gray-600 leading-relaxed">{feature.description}</p>
                   <motion.ul
                     variants={scaleIn}
-                    className='text-gray-600 dark:text-gray-300 mt-4 space-y-2'
+                    className='text-gray-600 mt-4 space-y-2'
                   >
                     {feature.points.map((point, i) => (
                       <motion.li
@@ -274,7 +274,7 @@ export default function Landing() {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-32 bg-gray-50 dark:bg-gray-900">
+      <section className="py-32 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold bg-gradient-to-r from-primary-500 to-secondary-600 bg-clip-text text-transparent mb-4">
@@ -325,15 +325,15 @@ export default function Landing() {
                 whileHover={{ scale: 1.05 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2 }}
-                className="text-center p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-all border border-gray-100 dark:border-gray-700 border-b-8 border-b-transparent group relative"
+                className="text-center p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all border border-gray-100 border-b-8 border-b-transparent group relative"
               >
                 <div className="hidden md:block absolute bottom-0 left-0 right-0 h-2 -mb-2 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-b-full"></div>
                 <div className="relative">
                   <div className="w-20 h-20 mx-auto bg-primary-600 rounded-full flex items-center justify-center mb-6">
                     <step.icon className="w-10 h-10 text-white" />
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">{step.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-300">{step.description}</p>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-4">{step.title}</h3>
+                  <p className="text-gray-600">{step.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -342,7 +342,7 @@ export default function Landing() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-32 bg-gradient-to-b from-primary-50 via-secondary-50 to-blue-50 dark:bg-gray-900 dark:via-gray-800 dark:to-gray-900">
+      <section className="py-32 bg-gradient-to-b from-primary-50 via-secondary-50 to-blue-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold bg-gradient-to-r from-primary-500 to-secondary-600 bg-clip-text text-transparent mb-4">
@@ -362,7 +362,7 @@ export default function Landing() {
               transition={{ duration: 0.5 }}
               className="text-center"
             >
-              <div className="bg-gradient-to-br from-primary-500 to-secondary-500 dark:from-gray-800 dark:to-gray-900 p-8 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700">
+              <div className="bg-gradient-to-br from-primary-500 to-secondary-500 p-8 rounded-2xl shadow-lg border border-gray-100">
                 <div className="flex items-center justify-center mb-6">
                   <img
                     src={testimonials[currentIndex].image}
@@ -391,7 +391,7 @@ export default function Landing() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-primary-600 to-secondary-600 dark:from-primary-900 dark:to-gray-800">
+      <section className="py-20 bg-gradient-to-br from-primary-600 to-secondary-600">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

@@ -24,10 +24,10 @@ export default function Footer() {
             {/* Logo Section */}
             <div onClick={() => handleNavigation('/')} className="cursor-pointer">
               <div className="flex items-center space-x-3">
-                <Search className="w-8 h-8 text-primary-600 dark:text-primary-400" />
+                <img src="https://raw.githubusercontent.com/WEBXELA/brand-images/e84c6074fba81c45b6ee4f0e57ac798890e6c352/logo/webxela-logo.svg" alt="Webxela Logo" className="w-10 h-10 sm:w-12 sm:h-12 object-contain" style={{ filter: 'brightness(0) invert(1)' }} />
                 <div>
-                  <h3 className="text-xl font-bold bg-gradient-to-r from-primary-500 to-secondary-600 bg-clip-text text-transparent">LEXP</h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">Professional Lead Generation Tool</p>
+                  <h3 className="text-xl font-bold text-white">LEXP</h3>
+                  <p className="text-sm text-gray-300">Professional Lead Generation Tool</p>
                 </div>
               </div>
             </div>
@@ -43,7 +43,7 @@ export default function Footer() {
               <li>
                 <button
                   onClick={() => handleNavigation('/')}
-                  className="text-base text-gray-600 hover:text-primary-600 transition-colors border-b border-transparent hover:border-primary-200"
+                  className="text-base text-white hover:text-primary-200 transition-colors border-b border-transparent hover:border-primary-200"
                 >
                   Home
                 </button>
@@ -51,7 +51,7 @@ export default function Footer() {
               <li>
                 <button
                   onClick={() => handleNavigation('/pricing')}
-                  className="text-base text-gray-600 hover:text-primary-600 transition-colors border-b border-transparent hover:border-primary-200"
+                  className="text-base text-white hover:text-primary-200 transition-colors border-b border-transparent hover:border-primary-200"
                 >
                   Pricing
                 </button>
@@ -59,7 +59,7 @@ export default function Footer() {
               <li>
                 <button
                   onClick={() => handleNavigation('/dashboard')}
-                  className="text-base text-gray-600 hover:text-primary-600 transition-colors border-b border-transparent hover:border-primary-200"
+                  className="text-base text-white hover:text-primary-200 transition-colors border-b border-transparent hover:border-primary-200"
                 >
                   Dashboard
                 </button>
@@ -72,8 +72,8 @@ export default function Footer() {
             <ul className="mt-4 space-y-4">
               <li className="flex items-center space-x-3 text-gray-600 dark:text-gray-300">
                 <Mail className="w-5 h-5" />
-                <a href="mailto:sales@webxela.com" className="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
-                  sales@webxela.com
+                <a href="mailto:lexp@webxela.com" className="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                  lexp@webxela.com
                 </a>
               </li>
               <li className="flex items-center space-x-3 text-gray-600 dark:text-gray-300">
@@ -90,9 +90,9 @@ export default function Footer() {
           </div>
         </div>
         
-        <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
-          <p className="text-center text-gray-600 dark:text-gray-300">
-            © 2025 Webxela. All rights reserved.
+        <div className="mt-8 pt-8 border-t border-gray-200">
+          <p className="text-center text-white text-sm font-normal">
+            © 2025 Webxela. All rights reserved. &nbsp;|&nbsp; Designed by <a href="https://umitra.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-primary-200">Uimitra</a> &nbsp;|&nbsp; copyright <a href="https://webxela.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-primary-200">webxela.com</a>
           </p>
         </div>
       </div>
