@@ -43,5 +43,6 @@ export interface SearchResponse {
   totalResults: number;
   currentPage: number;
   totalPages: number;
+  error?: string;
 }
 

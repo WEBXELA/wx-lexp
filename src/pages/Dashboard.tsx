@@ -58,6 +58,7 @@ export default function Dashboard() {
     isLoading: isLoadingLimits 
   } = useSearchLimit();
   const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [userId, setUserId] = useState<string | null>(null);
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
   const [showExportModal, setShowExportModal] = useState<boolean>(false);
   const [showUpgradeModal, setShowUpgradeModal] = useState<boolean>(false);
@@ -78,7 +79,7 @@ export default function Dashboard() {
   });
 
   const { data: searchResponse, isLoading, refetch } = useQuery<SearchResponse>(
-    ['profiles', filters],
+    ['profiles', filters, userId],
     () => {
       switch (filters.platform) {
         case 'instagram':
@@ -88,7 +89,7 @@ export default function Dashboard() {
         case 'twitter':
           return searchTwitterProfiles(filters);
         default:
-          return searchProfiles(filters);
+          return searchProfiles(filters, userId || undefined);
       }
     },
     {
@@ -107,6 +108,7 @@ export default function Dashboard() {
         return;
       }
       setUserEmail(user?.email || null);
+      setUserId(user?.id || null);
       setIsAdmin(user?.email === ADMIN_EMAIL);
     };
 
@@ -126,22 +128,6 @@ export default function Dashboard() {
   const handleSearch = async () => {
     if (!filters.jobTitle && !filters.company && !filters.skills) {
       alert('Please enter at least one search criteria (Job Title, Company, or Skills)');
-      return;
-    }
-
-    if (remainingSearches === 0 && !hasSubscription) {
-      const message = timeUntilReset
-        ? `Your search limit has been reached. You can search again in ${timeUntilReset}.`
-        : 'Your search limit has been reached. You can search again after 24 hours.';
-        
-      setShowUpgradeModal(true);
-      alert(message + '\nFor unlimited searches, upgrade to our membership.');
-      return;
-    }
-    
-    const canSearch = await incrementSearchCount();
-    if (!canSearch) {
-      setShowUpgradeModal(true);
       return;
     }
 
@@ -397,6 +383,25 @@ export default function Dashboard() {
                 )}
               </AnimatePresence>
             </div>
+
+            {/* Error handling for search limits */}
+            {searchResponse?.error && (
+              <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
+                <div className="flex items-center">
+                  <AlertCircle className="w-5 h-5 text-red-500 mr-2" />
+                  <div>
+                    <h3 className="text-red-800 font-medium">Search Limit Reached</h3>
+                    <p className="text-red-600 text-sm mt-1">{searchResponse.error}</p>
+                    <button
+                      onClick={() => setShowUpgradeModal(true)}
+                      className="mt-2 text-red-600 hover:text-red-800 font-medium text-sm underline"
+                    >
+                      Upgrade your plan for more searches
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
 
             <ProfileList
               profiles={displayedProfiles}

@@ -1,19 +1,14 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
-
-interface SearchLimits {
-  search_count: number;
-  last_reset: string;
-  last_search: string;
-}
+import { checkSearchLimit, incrementSearchCount as incrementSearchCountUtil } from '../utils/searchLimits';
 
 export function useSearchLimit() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchCount, setSearchCount] = useState(0);
-  const [lastSearch, setLastSearch] = useState<string | null>(null);
-  const [lastReset, setLastReset] = useState<string | null>(null);
+  const [maxSearches, setMaxSearches] = useState(10);
   const [hasSubscription, setHasSubscription] = useState(false);
+  const [userId, setUserId] = useState<string | null>(null);
 
   useEffect(() => {
     checkLimits();
@@ -27,41 +22,15 @@ export function useSearchLimit() {
         return;
       }
 
-      // Get current search limits
-      const { data: limits, error: limitsError } = await supabase
-        .from('search_limits')
-        .select('search_count, last_reset, last_search')
-        .single();
+      const currentUserId = session.session.user.id;
+      setUserId(currentUserId);
 
-      if (limitsError && limitsError.code !== 'PGRST116') { // PGRST116 is "no rows returned"
-        throw limitsError;
-      }
-
-      if (limits) {
-        const lastSearchDate = new Date(limits.last_search);
-        const resetTime = new Date(lastSearchDate.getTime() + 24 * 60 * 60 * 1000);
-        const now = new Date();
-
-        if (now >= resetTime) {
-          // Reset search count if 24 hours have passed
-          const { error: resetError } = await supabase
-            .from('search_limits')
-            .update({ search_count: 0, last_reset: now.toISOString() })
-            .eq('id', session.session.user.id);
-
-          if (resetError) throw resetError;
-
-          setSearchCount(0);
-          setLastReset(now.toISOString());
-        } else {
-          setSearchCount(limits.search_count);
-          setLastReset(limits.last_reset);
-          setLastSearch(limits.last_search);
-        }
-      }
-
-      // TODO: Check subscription status
-      setHasSubscription(false); // Replace with actual subscription check
+      // Get search limit info using the new utility
+      const limitInfo = await checkSearchLimit(currentUserId);
+      
+      setSearchCount(limitInfo.dailyCount);
+      setMaxSearches(limitInfo.maxSearches);
+      setHasSubscription(limitInfo.maxSearches > 10); // Premium/Pro plans have more than 10 searches
 
     } catch (err) {
       console.error('Error checking limits:', err);
@@ -73,17 +42,16 @@ export function useSearchLimit() {
 
   const incrementSearchCount = async () => {
     try {
-      if (hasSubscription) return true;
+      if (!userId) return false;
 
-      const { data: result, error } = await supabase
-        .rpc('increment_search_count');
+      const success = await incrementSearchCountUtil(userId);
+      
+      if (success) {
+        // Refresh limits after increment
+        await checkLimits();
+      }
 
-      if (error) throw error;
-
-      // Refresh limits after increment
-      await checkLimits();
-
-      return result;
+      return success;
     } catch (err) {
       console.error('Error incrementing search count:', err);
       setError(err instanceof Error ? err.message : 'Error updating search count');
@@ -92,22 +60,20 @@ export function useSearchLimit() {
   };
 
   const getTimeUntilReset = (): string | null => {
-    if (!lastSearch) return null;
-
-    const lastSearchDate = new Date(lastSearch);
-    const resetTime = new Date(lastSearchDate.getTime() + 24 * 60 * 60 * 1000);
+    // Since we're using daily limits, show time until midnight
     const now = new Date();
+    const tomorrow = new Date(now);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    tomorrow.setHours(0, 0, 0, 0);
     
-    if (now >= resetTime) return null;
-
-    const diff = resetTime.getTime() - now.getTime();
+    const diff = tomorrow.getTime() - now.getTime();
     const hours = Math.floor(diff / (1000 * 60 * 60));
     const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
 
     return `${hours}h ${minutes}m`;
   };
 
-  const remainingSearches = hasSubscription ? Infinity : Math.max(0, 10 - (searchCount || 0));
+  const remainingSearches = hasSubscription ? Infinity : Math.max(0, maxSearches - searchCount);
   const timeUntilReset = getTimeUntilReset();
 
   return {
@@ -117,7 +83,7 @@ export function useSearchLimit() {
     incrementSearchCount,
     remainingSearches,
     hasSubscription,
-    lastReset,
-    timeUntilReset
+    timeUntilReset,
+    maxSearches
   };
 }

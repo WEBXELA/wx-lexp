@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { SearchFiltersState, Profile, SearchResponse } from '../types';
+import { checkSearchLimit, incrementSearchCount } from '../utils/searchLimits';
 
 const GOOGLE_API_KEY = 'AIzaSyDOojV79DnbYOkkhgxZXa_nZzq_8WUcNNI';
 const SEARCH_ENGINE_ID = '45949347f8b954cf9';
@@ -44,8 +45,22 @@ function extractTitle(title: string): { fullName: string; position: string; comp
   };
 }
 
-export async function searchProfiles(filters: SearchFiltersState): Promise<SearchResponse> {
+export async function searchProfiles(filters: SearchFiltersState, userId?: string): Promise<SearchResponse> {
   try {
+    // Check search limits if userId is provided
+    if (userId) {
+      const limitInfo = await checkSearchLimit(userId);
+      if (!limitInfo.canSearch) {
+        return {
+          items: [],
+          totalResults: 0,
+          currentPage: filters.page,
+          totalPages: 0,
+          error: `Search limit reached. You have used ${limitInfo.dailyCount}/${limitInfo.maxSearches} searches today. Upgrade your plan for more searches.`
+        };
+      }
+    }
+
     const startIndex = (filters.page - 1) * RESULTS_PER_PAGE + 1;
     const query = `site:linkedin.com/in/ ${filters.jobTitle || ''} ${filters.location || ''} ${filters.industry || ''} ${filters.companySize || ''} ${filters.company || ''} ${filters.skills || ''} ${filters.languages || ''}`.trim();
     
@@ -94,6 +109,11 @@ export async function searchProfiles(filters: SearchFiltersState): Promise<Searc
 
     const totalResults = Math.min(response.data.searchInformation?.totalResults || 0, 100);
     const totalPages = Math.ceil(totalResults / RESULTS_PER_PAGE);
+
+    // Increment search count if userId is provided and search was successful
+    if (userId && profiles.length > 0) {
+      await incrementSearchCount(userId);
+    }
 
     return {
       items: profiles,
